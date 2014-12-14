@@ -1,0 +1,2 @@
+pugixml 1.2
+http://pugixml.org/

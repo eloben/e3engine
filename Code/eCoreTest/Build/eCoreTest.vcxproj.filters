@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source\Test">
+      <UniqueIdentifier>{5d585c4f-c275-4f6c-8786-8275e89c17db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Test\Containers">
+      <UniqueIdentifier>{d065ad43-ebad-4627-901f-4070c6f9e503}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Test\Time">
+      <UniqueIdentifier>{3c34121d-f9c1-4591-afde-dea30caba213}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Test\Math">
+      <UniqueIdentifier>{b9e449c2-3936-4cf5-97de-ecd488c39884}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Test\Serialization">
+      <UniqueIdentifier>{e3c6af7f-dc3c-4331-9928-3c23f20646df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Test\Threads">
+      <UniqueIdentifier>{f59c725f-1e65-4906-8914-1798f9dd9826}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Test\Memory">
+      <UniqueIdentifier>{a8d933b9-e3ef-463f-91dd-f857ab3a5712}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Test\Text">
+      <UniqueIdentifier>{f0a4fe39-b7c8-46c2-b351-a6677b86ca56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Test\FileSystem">
+      <UniqueIdentifier>{b3b3d26c-5d53-4199-b68b-56c6023cad4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Test\SmartPointers">
+      <UniqueIdentifier>{731d1293-c66b-4d02-a8df-5f585f96c6f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Test\EventSystem">
+      <UniqueIdentifier>{5d27d049-47dc-4304-9c95-c918ff4c6e5c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Source\Test\Containers\List.cpp">
+      <Filter>Source\Test\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Test\Text\StringBuffer.cpp">
+      <Filter>Source\Test\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Test\Containers\Map.cpp">
+      <Filter>Source\Test\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Test\Containers\Queue.cpp">
+      <Filter>Source\Test\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Test\Containers\Stack.cpp">
+      <Filter>Source\Test\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Main.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Test\Time\Time.cpp">
+      <Filter>Source\Test\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Test\Math\Vector.cpp">
+      <Filter>Source\Test\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Test\Math\Matrix.cpp">
+      <Filter>Source\Test\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Test\Math\Quaternion.cpp">
+      <Filter>Source\Test\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Test\Serialization\Serialization.cpp">
+      <Filter>Source\Test\Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Test\Math\Hash.cpp">
+      <Filter>Source\Test\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Test\Threads\Thread.cpp">
+      <Filter>Source\Test\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Test\EventSystem\Event.cpp">
+      <Filter>Source\Test\EventSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Test\Memory\Factory.cpp">
+      <Filter>Source\Test\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Test\Memory\Allocator.cpp">
+      <Filter>Source\Test\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Test\Math\Algorithm.cpp">
+      <Filter>Source\Test\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Test\FileSystem\File.cpp">
+      <Filter>Source\Test\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Test\Text\String.cpp">
+      <Filter>Source\Test\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Test\Containers\DynamicArray.cpp">
+      <Filter>Source\Test\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Test\Containers\Array.cpp">
+      <Filter>Source\Test\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\CoreTestPch.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Test\SmartPointers\IntrusivePtr.cpp">
+      <Filter>Source\Test\SmartPointers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Test\SmartPointers\SharedPtr.cpp">
+      <Filter>Source\Test\SmartPointers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Test\SmartPointers\WeakPtr.cpp">
+      <Filter>Source\Test\SmartPointers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Test\Memory\GarbageCollection.cpp">
+      <Filter>Source\Test\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Test\Threads\ConditionVariable.cpp">
+      <Filter>Source\Test\Threads</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Source\Test\EventSystem\Event.h">
+      <Filter>Source\Test\EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\Containers\List.h">
+      <Filter>Source\Test\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\Containers\Map.h">
+      <Filter>Source\Test\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\Containers\Queue.h">
+      <Filter>Source\Test\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\Containers\Stack.h">
+      <Filter>Source\Test\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\Math\Hash.h">
+      <Filter>Source\Test\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\Math\Matrix.h">
+      <Filter>Source\Test\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\Math\Quaternion.h">
+      <Filter>Source\Test\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\Math\Vector.h">
+      <Filter>Source\Test\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\Memory\Factory.h">
+      <Filter>Source\Test\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\Serialization\Serialization.h">
+      <Filter>Source\Test\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\Text\StringBuffer.h">
+      <Filter>Source\Test\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\Threads\Thread.h">
+      <Filter>Source\Test\Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\Time\Time.h">
+      <Filter>Source\Test\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\Common.h">
+      <Filter>Source\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\CoreTestPch.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\Memory\Allocator.h">
+      <Filter>Source\Test\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\Math\Algorithm.h">
+      <Filter>Source\Test\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\FileSystem\File.h">
+      <Filter>Source\Test\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\Text\String.h">
+      <Filter>Source\Test\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\Containers\DynamicArray.h">
+      <Filter>Source\Test\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\Containers\Array.h">
+      <Filter>Source\Test\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\SmartPointers\IntrusivePtr.h">
+      <Filter>Source\Test\SmartPointers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\SmartPointers\SharedPtr.h">
+      <Filter>Source\Test\SmartPointers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\SmartPointers\WeakPtr.h">
+      <Filter>Source\Test\SmartPointers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\Memory\GarbageCollection.h">
+      <Filter>Source\Test\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Test\Threads\ConditionVariable.h">
+      <Filter>Source\Test\Threads</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

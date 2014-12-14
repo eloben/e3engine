@@ -1,0 +1,610 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Private">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Private\Tools">
+      <UniqueIdentifier>{bebf2d99-2c42-4260-8b3a-c78d782a8822}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Scene">
+      <UniqueIdentifier>{b9ea5a37-49ae-4689-852c-4438c2c63d07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Public\Tools">
+      <UniqueIdentifier>{6f5bb425-203a-45a1-95b4-cbb0f6b5cb3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Core">
+      <UniqueIdentifier>{9b5db1cc-8375-4eba-902f-ae52a3f4d29d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Scene">
+      <UniqueIdentifier>{9f823ed8-bb0d-4ff7-9a28-66b86106f01a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Shaders">
+      <UniqueIdentifier>{207b8fab-3dea-48af-aa66-43d795d05938}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Shaders\HLSL">
+      <UniqueIdentifier>{f3f366ba-a0c7-4f40-847a-c0a005a9b7d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Shaders\FX">
+      <UniqueIdentifier>{f371ab08-ee1e-4d52-b902-7e64bf3209f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Render">
+      <UniqueIdentifier>{d8569b1a-539c-41c9-9bf3-08799cd1fccf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Render\Gpu">
+      <UniqueIdentifier>{08c86ed2-433a-4957-8dc9-8a8823b458d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Mesh">
+      <UniqueIdentifier>{2ba5bddd-426e-4e8a-b869-721639f1698e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Input">
+      <UniqueIdentifier>{a50b494d-381a-4f53-a852-591a9caad953}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Projection">
+      <UniqueIdentifier>{4b479614-597d-4b1f-a4e9-c22506bdf4c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Scene\SceneObject">
+      <UniqueIdentifier>{e715936f-c8d4-4194-a879-550e3a4b67d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Scene\SceneContext">
+      <UniqueIdentifier>{2317b0ab-51a8-4268-9b9a-f11e5d8591a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Scene\SceneObjectComponent">
+      <UniqueIdentifier>{4fd9d859-0305-48bc-ae46-1ab18efa8ead}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Scene\SceneObjectHandler">
+      <UniqueIdentifier>{13a9f3d5-91a9-4a0d-bcce-9d78f8eefdda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Procedural">
+      <UniqueIdentifier>{8ebc56d6-f533-437c-9b42-63e9dc624b74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Scene\Objects">
+      <UniqueIdentifier>{6b229b30-4566-4512-aa39-a1b0e6a1e067}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Scene\Components">
+      <UniqueIdentifier>{a28a2a81-28c0-4558-8e02-e48db0311884}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Material">
+      <UniqueIdentifier>{13afa47d-0235-4e0f-b683-5415dbc6d5bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Render\Device">
+      <UniqueIdentifier>{cc2d5126-b30a-4970-9d7b-1892f95a4b4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Render\Device\DX11">
+      <UniqueIdentifier>{499cae5b-c8b3-4d4e-abca-8c844ca258d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Render\Technique">
+      <UniqueIdentifier>{7f10160a-8d4b-4f87-8ffc-b5730a13dc37}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Source\Scene.h">
+      <Filter>Private\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\SceneManager.h">
+      <Filter>Private\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\CameraObject.h">
+      <Filter>Private\Scene\SceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\EmptyObject.h">
+      <Filter>Private\Scene\SceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\MeshObject.h">
+      <Filter>Private\Scene\SceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\SkyBoxObject.h">
+      <Filter>Private\Scene\SceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\TerrainObject.h">
+      <Filter>Private\Scene\SceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\WaterObject.h">
+      <Filter>Private\Scene\SceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\CameraComponent.h">
+      <Filter>Private\Scene\SceneObjectComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\MeshComponent.h">
+      <Filter>Private\Scene\SceneObjectComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\SkyBoxComponent.h">
+      <Filter>Private\Scene\SceneObjectComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\TerrainComponent.h">
+      <Filter>Private\Scene\SceneObjectComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\TransformComponent.h">
+      <Filter>Private\Scene\SceneObjectComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\UpdaterComponent.h">
+      <Filter>Private\Scene\SceneObjectComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\WaterComponent.h">
+      <Filter>Private\Scene\SceneObjectComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\SceneContext.h">
+      <Filter>Private\Scene\SceneContext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Debug.h">
+      <Filter>Public\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Log.h">
+      <Filter>Public\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Color.h">
+      <Filter>Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\EngineException.h">
+      <Filter>Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\EngineManager.h">
+      <Filter>Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\EngineSettings.h">
+      <Filter>Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\IAudio.h">
+      <Filter>Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\IAudioManager.h">
+      <Filter>Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\IEngine.h">
+      <Filter>Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\IInputManager.h">
+      <Filter>Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\IMaterial.h">
+      <Filter>Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ITexture.h">
+      <Filter>Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\IScene.h">
+      <Filter>Public\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ISceneContext.h">
+      <Filter>Public\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ISceneManager.h">
+      <Filter>Public\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ICameraObject.h">
+      <Filter>Public\Scene\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\IMeshObject.h">
+      <Filter>Public\Scene\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ISkyBoxObject.h">
+      <Filter>Public\Scene\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ITerrainObject.h">
+      <Filter>Public\Scene\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\IWaterObject.h">
+      <Filter>Public\Scene\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ICameraComponent.h">
+      <Filter>Public\Scene\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\IMeshComponent.h">
+      <Filter>Public\Scene\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ISkyBoxComponent.h">
+      <Filter>Public\Scene\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ITerrainComponent.h">
+      <Filter>Public\Scene\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ITransformComponent.h">
+      <Filter>Public\Scene\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\IUpdaterComponent.h">
+      <Filter>Public\Scene\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\IWaterComponent.h">
+      <Filter>Public\Scene\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\SceneGraph.h">
+      <Filter>Private\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\IUpdaterFunction.h">
+      <Filter>Public\Scene\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\SceneObjectCore.h">
+      <Filter>Private\Scene\SceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\LightProperties.h">
+      <Filter>Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ViewPortProperties.h">
+      <Filter>Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\CameraObjectHandler.h">
+      <Filter>Private\Scene\SceneObjectHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\EmptyObjectHandler.h">
+      <Filter>Private\Scene\SceneObjectHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\MeshObjectHandler.h">
+      <Filter>Private\Scene\SceneObjectHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\ISceneObjectHandler.h">
+      <Filter>Private\Scene\SceneObjectHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\SceneObjectHandlerCore.h">
+      <Filter>Private\Scene\SceneObjectHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\ISceneObjectHandlerFactory.h">
+      <Filter>Private\Scene\SceneObjectHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\SceneObjectHandlerManager.h">
+      <Filter>Private\Scene\SceneObjectHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\SceneObjectHandlerRegistrar.h">
+      <Filter>Private\Scene\SceneObjectHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ProceduralTreeProperties.h">
+      <Filter>Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\ISceneFactory.h">
+      <Filter>Private\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\SceneManagerRegistrars.h">
+      <Filter>Private\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\ISceneObjectFactory.h">
+      <Filter>Private\Scene\SceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\ISceneContextFactory.h">
+      <Filter>Private\Scene\SceneContext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\ISceneObjectComponentFactory.h">
+      <Filter>Private\Scene\SceneObjectComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ISceneObject.h">
+      <Filter>Public\Scene\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ISceneObjectComponent.h">
+      <Filter>Public\Scene\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\EnginePch.h">
+      <Filter>Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Engine.h">
+      <Filter>Private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\EngineFactory.h">
+      <Filter>Private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\EngineManagerImpl.h">
+      <Filter>Private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\EngineRegistrar.h">
+      <Filter>Private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\IRenderCommandBuffer.h">
+      <Filter>Private\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\IRenderCommandBufferFactory.h">
+      <Filter>Private\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\IRenderContext.h">
+      <Filter>Private\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\IRenderContextFactory.h">
+      <Filter>Private\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\RenderCommandBuffer.h">
+      <Filter>Private\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\RenderContext.h">
+      <Filter>Private\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\RenderDeviceManager.h">
+      <Filter>Private\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\RenderManager.h">
+      <Filter>Private\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\RenderManagerRegistrars.h">
+      <Filter>Private\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Device\IRenderDevice.h">
+      <Filter>Private\Render\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Device\IRenderDeviceFactory.h">
+      <Filter>Private\Render\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Device\DX11\DX11BlendState.h">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Device\DX11\DX11BufferCore.h">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Device\DX11\DX11ConstantBuffer.h">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Device\DX11\DX11Core.h">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Device\DX11\DX11DepthStencilState.h">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Device\DX11\DX11IndexBuffer.h">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Device\DX11\DX11InputLayout.h">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Device\DX11\DX11PixelShader.h">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Device\DX11\DX11RasterState.h">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Device\DX11\DX11RenderDevice.h">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Device\DX11\DX11RenderDeviceRegistrars.h">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Device\DX11\DX11SamplerState.h">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Device\DX11\DX11Texture2D.h">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Device\DX11\DX11VertexBuffer.h">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Device\DX11\DX11VertexShader.h">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Technique\IRenderTechnique.h">
+      <Filter>Private\Render\Technique</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Technique\IRenderTechniqueFactory.h">
+      <Filter>Private\Render\Technique</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Technique\PhongRenderTechnique.h">
+      <Filter>Private\Render\Technique</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Gpu\BlendStateDescriptor.h">
+      <Filter>Private\Render\Gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Gpu\DepthStencilStateDescriptor.h">
+      <Filter>Private\Render\Gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Gpu\GpuInputLayout.h">
+      <Filter>Private\Render\Gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Gpu\GpuInputLayoutDescriptor.h">
+      <Filter>Private\Render\Gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Gpu\IGpuInputLayout.h">
+      <Filter>Private\Render\Gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Gpu\IGpuInputLayoutFactory.h">
+      <Filter>Private\Render\Gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Gpu\IGpuResource.h">
+      <Filter>Private\Render\Gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Gpu\IGpuResourceFactory.h">
+      <Filter>Private\Render\Gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Gpu\IGpuShader.h">
+      <Filter>Private\Render\Gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Gpu\IGpuShaderFactory.h">
+      <Filter>Private\Render\Gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Gpu\IGpuState.h">
+      <Filter>Private\Render\Gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Gpu\IGpuStateFactory.h">
+      <Filter>Private\Render\Gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Gpu\RasterStateDescriptor.h">
+      <Filter>Private\Render\Gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Gpu\RenderTargetDescriptor.h">
+      <Filter>Private\Render\Gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Render\Gpu\SamplerStateDescriptor.h">
+      <Filter>Private\Render\Gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Scene\ObjectHandler\MeshObjectHandler.h">
+      <Filter>Private\Mesh</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Source\Debug.cpp">
+      <Filter>Private\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Log.cpp">
+      <Filter>Private\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Scene.cpp">
+      <Filter>Private\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\SceneManager.cpp">
+      <Filter>Private\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\CameraObject.cpp">
+      <Filter>Private\Scene\SceneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\EmptyObject.cpp">
+      <Filter>Private\Scene\SceneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\MeshObject.cpp">
+      <Filter>Private\Scene\SceneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\SkyBoxObject.cpp">
+      <Filter>Private\Scene\SceneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\TerrainObject.cpp">
+      <Filter>Private\Scene\SceneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\WaterObject.cpp">
+      <Filter>Private\Scene\SceneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\CameraComponent.cpp">
+      <Filter>Private\Scene\SceneObjectComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\MeshComponent.cpp">
+      <Filter>Private\Scene\SceneObjectComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\SkyBoxComponent.cpp">
+      <Filter>Private\Scene\SceneObjectComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\TerrainComponent.cpp">
+      <Filter>Private\Scene\SceneObjectComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\TransformComponent.cpp">
+      <Filter>Private\Scene\SceneObjectComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\UpdaterComponent.cpp">
+      <Filter>Private\Scene\SceneObjectComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\WaterComponent.cpp">
+      <Filter>Private\Scene\SceneObjectComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\SceneContext.cpp">
+      <Filter>Private\Scene\SceneContext</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\SceneGraph.cpp">
+      <Filter>Private\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\SceneObjectCore.cpp">
+      <Filter>Private\Scene\SceneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\CameraObjectHandler.cpp">
+      <Filter>Private\Scene\SceneObjectHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\EmptyObjectHandler.cpp">
+      <Filter>Private\Scene\SceneObjectHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\MeshObjectHandler.cpp">
+      <Filter>Private\Scene\SceneObjectHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\SceneObjectHandlerCore.cpp">
+      <Filter>Private\Scene\SceneObjectHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\SceneObjectHandlerManager.cpp">
+      <Filter>Private\Scene\SceneObjectHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\EnginePch.cpp">
+      <Filter>Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Engine.cpp">
+      <Filter>Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\EngineSettings.cpp">
+      <Filter>Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\EngineManager.cpp">
+      <Filter>Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\EngineManagerImpl.cpp">
+      <Filter>Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Render\RenderCommandBuffer.cpp">
+      <Filter>Private\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Render\RenderDeviceManager.cpp">
+      <Filter>Private\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Render\RenderManager.cpp">
+      <Filter>Private\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Render\Device\DX11\DX11BlendState.cpp">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Render\Device\DX11\DX11ConstantBuffer.cpp">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Render\Device\DX11\DX11DepthStencilState.cpp">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Render\Device\DX11\DX11IndexBuffer.cpp">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Render\Device\DX11\DX11InputLayout.cpp">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Render\Device\DX11\DX11PixelShader.cpp">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Render\Device\DX11\DX11RasterState.cpp">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Render\Device\DX11\DX11RenderDevice.cpp">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Render\Device\DX11\DX11SamplerState.cpp">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Render\Device\DX11\DX11Texture2D.cpp">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Render\Device\DX11\DX11VertexBuffer.cpp">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Render\Device\DX11\DX11VertexShader.cpp">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Render\Technique\PhongRenderTechnique.cpp">
+      <Filter>Private\Render\Technique</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Scene\ObjectHandler\MeshObjectHandler.cpp">
+      <Filter>Private\Mesh</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Resource\Water.fx">
+      <Filter>Private\Shaders\FX</Filter>
+    </None>
+    <None Include="..\Resource\Default.fx">
+      <Filter>Private\Shaders\FX</Filter>
+    </None>
+    <None Include="..\Resource\Default2.fx">
+      <Filter>Private\Shaders\FX</Filter>
+    </None>
+    <None Include="..\Resource\Instance.fx">
+      <Filter>Private\Shaders\FX</Filter>
+    </None>
+    <None Include="..\Resource\Instance2.fx">
+      <Filter>Private\Shaders\FX</Filter>
+    </None>
+    <None Include="..\Resource\Light.fx">
+      <Filter>Private\Shaders\FX</Filter>
+    </None>
+    <None Include="..\Resource\Light2.fx">
+      <Filter>Private\Shaders\FX</Filter>
+    </None>
+    <None Include="..\Resource\Reflection.fx">
+      <Filter>Private\Shaders\FX</Filter>
+    </None>
+    <None Include="..\Resource\SkyBox.fx">
+      <Filter>Private\Shaders\FX</Filter>
+    </None>
+    <None Include="..\Resource\Terrain.fx">
+      <Filter>Private\Shaders\FX</Filter>
+    </None>
+    <None Include="..\HLSL\Color.hlsl">
+      <Filter>Private\Shaders\HLSL</Filter>
+    </None>
+    <None Include="..\Source\Render\Device\DX11\DX11BufferCore.inl">
+      <Filter>Private\Render\Device\DX11</Filter>
+    </None>
+  </ItemGroup>
+</Project>

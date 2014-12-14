@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\ThirdParty\pugixml\pugiconfig.hpp" />
+    <ClInclude Include="..\..\..\ThirdParty\pugixml\pugixml.hpp" />
+    <ClInclude Include="..\Include\Application\Application.h" />
+    <ClInclude Include="..\Include\Application\Input.h" />
+    <ClInclude Include="..\Include\Application\InputManager.h" />
+    <ClInclude Include="..\Include\Application\Win32\InputImpl.h" />
+    <ClInclude Include="..\Include\Assertion\Assert.h" />
+    <ClInclude Include="..\Include\Assertion\Exception.h" />
+    <ClInclude Include="..\Include\Base.h" />
+    <ClInclude Include="..\Include\Containers\DynamicArray.h" />
+    <ClInclude Include="..\Include\Containers\List.h" />
+    <ClInclude Include="..\Include\Containers\Map.h" />
+    <ClInclude Include="..\Include\Containers\Pair.h" />
+    <ClInclude Include="..\Include\Containers\Queue.h" />
+    <ClInclude Include="..\Include\Containers\Stack.h" />
+    <ClInclude Include="..\Include\Containers\Array.h" />
+    <ClInclude Include="..\Include\EventSystem\Event.h" />
+    <ClInclude Include="..\Include\FileSystem\Archive.h" />
+    <ClInclude Include="..\Include\FileSystem\File.h" />
+    <ClInclude Include="..\Include\FileSystem\Path.h" />
+    <ClInclude Include="..\Include\IntrusivePtr.h" />
+    <ClInclude Include="..\Include\Math\Algorithm.h" />
+    <ClInclude Include="..\Include\Math\Box2.h" />
+    <ClInclude Include="..\Include\Math\Box3.h" />
+    <ClInclude Include="..\Include\Math\Comparison.h" />
+    <ClInclude Include="..\Include\Math\Distance.h" />
+    <ClInclude Include="..\Include\Math\Hash.h" />
+    <ClInclude Include="..\Include\Math\Intersection.h" />
+    <ClInclude Include="..\Include\Math\Math.h" />
+    <ClInclude Include="..\Include\Math\Matrix4.h" />
+    <ClInclude Include="..\Include\Math\Plane.h" />
+    <ClInclude Include="..\Include\Math\Projection.h" />
+    <ClInclude Include="..\Include\Math\Quaternion.h" />
+    <ClInclude Include="..\Include\Math\Random.h" />
+    <ClInclude Include="..\Include\Math\Sphere.h" />
+    <ClInclude Include="..\Include\Math\Vector2.h" />
+    <ClInclude Include="..\Include\Math\Vector3.h" />
+    <ClInclude Include="..\Include\Math\Vector4.h" />
+    <ClInclude Include="..\Include\Memory\Allocator.h" />
+    <ClInclude Include="..\Include\Memory\Factory.h" />
+    <ClInclude Include="..\Include\Memory\GarbageCollection.h" />
+    <ClInclude Include="..\Include\Memory\Heap.h" />
+    <ClInclude Include="..\Include\Memory\Memory.h" />
+    <ClInclude Include="..\Include\Memory\Msvc\HeapImpl.h" />
+    <ClInclude Include="..\Include\Msvc\PlatformBase.h" />
+    <ClInclude Include="..\Include\SafeCast.h" />
+    <ClInclude Include="..\Include\ScopedPtr.h" />
+    <ClInclude Include="..\Include\Serialization\ByteSerializer.h" />
+    <ClInclude Include="..\Include\Serialization\ISerializer.h" />
+    <ClInclude Include="..\Include\Serialization\StringSerializer.h" />
+    <ClInclude Include="..\Include\Serialization\XmlSerializer.h" />
+    <ClInclude Include="..\Include\SharedPtr.h" />
+    <ClInclude Include="..\Include\Singleton.h" />
+    <ClInclude Include="..\Include\Text\CharList.h" />
+    <ClInclude Include="..\Include\Text\Text.h" />
+    <ClInclude Include="..\Include\Text\CharArray.h" />
+    <ClInclude Include="..\Include\Text\String.h" />
+    <ClInclude Include="..\Include\Threads\Atomic.h" />
+    <ClInclude Include="..\Include\Threads\ConditionVariable.h" />
+    <ClInclude Include="..\Include\Threads\IRunnable.h" />
+    <ClInclude Include="..\Include\Threads\Lock.h" />
+    <ClInclude Include="..\Include\Threads\Msvc\AtomicImpl.h" />
+    <ClInclude Include="..\Include\Threads\Mutex.h" />
+    <ClInclude Include="..\Include\Threads\Thread.h" />
+    <ClInclude Include="..\Include\Threads\ThreadPool.h" />
+    <ClInclude Include="..\Include\Threads\ThreadPoolWorker.h" />
+    <ClInclude Include="..\Include\Time\Time.h" />
+    <ClInclude Include="..\Include\Time\Timer.h" />
+    <ClInclude Include="..\Include\CorePch.h" />
+    <ClInclude Include="..\Include\WeakPtr.h" />
+    <ClInclude Include="..\Include\Win32\ComUtil.h" />
+    <ClInclude Include="..\Source\Application\Win32\ApplicationImpl.h" />
+    <ClInclude Include="..\Source\Application\Win32\InputManagerImpl.h" />
+    <ClInclude Include="..\Source\FileSystem\Win32\FileImpl.h" />
+    <ClInclude Include="..\Source\Serialization\XmlSerializerImpl.h" />
+    <ClInclude Include="..\Source\Text\StringImpl.h" />
+    <ClInclude Include="..\Source\Threads\Win32\ConditionVariableImpl.h" />
+    <ClInclude Include="..\Source\Threads\Win32\MutexImpl.h" />
+    <ClInclude Include="..\Source\Threads\Win32\ThreadImpl.h" />
+    <ClInclude Include="..\Source\Time\Win32\TimeImpl.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\ThirdParty\pugixml\pugixml.cpp" />
+    <ClCompile Include="..\Source\Application\Application.cpp" />
+    <ClCompile Include="..\Source\Application\InputManager.cpp" />
+    <ClCompile Include="..\Source\Application\Win32\ApplicationImpl.cpp" />
+    <ClCompile Include="..\Source\Application\Win32\InputManagerImpl.cpp" />
+    <ClCompile Include="..\Source\FileSystem\Archive.cpp" />
+    <ClCompile Include="..\Source\FileSystem\File.cpp" />
+    <ClCompile Include="..\Source\FileSystem\Win32\FileImpl.cpp" />
+    <ClCompile Include="..\Source\Math\Random.cpp" />
+    <ClCompile Include="..\Source\Memory\Allocator.cpp" />
+    <ClCompile Include="..\Source\Serialization\XmlSerializer.cpp" />
+    <ClCompile Include="..\Source\Serialization\XmlSerializerImpl.cpp" />
+    <ClCompile Include="..\Source\Text\String.cpp" />
+    <ClCompile Include="..\Source\Threads\ConditionVariable.cpp" />
+    <ClCompile Include="..\Source\Threads\Mutex.cpp" />
+    <ClCompile Include="..\Source\Threads\Thread.cpp" />
+    <ClCompile Include="..\Source\Threads\ThreadPool.cpp" />
+    <ClCompile Include="..\Source\Threads\Win32\ConditionVariableImpl.cpp" />
+    <ClCompile Include="..\Source\Threads\Win32\ThreadImpl.cpp" />
+    <ClCompile Include="..\Source\Time\Time.cpp" />
+    <ClCompile Include="..\Source\Time\Win32\TimeImpl.cpp" />
+    <ClCompile Include="..\Source\CorePch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="eCore.rc" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{034A0ED9-8616-4BE8-98CA-340C71EDC4D2}</ProjectGuid>
+    <RootNamespace>Utilities</RootNamespace>
+    <ProjectName>eCore</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\Bin\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\..\..\Bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\Obj\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\..\..\Obj\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\Bin\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\..\..\Bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\Obj\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\..\..\Obj\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectName)D</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectName)$(Platform)D</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectName)</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectName)$(Platform)</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\Include;..\..\..\ThirdParty\vld\include;..\..\..\ThirdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>E_SETTING_DYNAMIC_LIBRARY; WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>CorePch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+    <PostBuildEvent>
+      <Command>xcopy /Y "..\..\..\ThirdParty\vld\bin\x86\*.*" "$(OutDir)"</Command>
+    </PostBuildEvent>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\ThirdParty\vld\lib\x86</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\Include;..\..\..\ThirdParty\vld\include;..\..\..\ThirdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>E_SETTING_DYNAMIC_LIBRARY; WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>CorePch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+    <PostBuildEvent>
+      <Command>xcopy /Y "..\..\..\ThirdParty\vld\bin\x64\*.*" "$(OutDir)"</Command>
+    </PostBuildEvent>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\..\..\ThirdParty\vld\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\Include;..\..\..\ThirdParty\vld\include;..\..\..\ThirdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>E_SETTING_DYNAMIC_LIBRARY; WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>CorePch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+    <Manifest>
+      <AssemblyIdentity>
+      </AssemblyIdentity>
+    </Manifest>
+    <Link>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\Include;..\..\..\ThirdParty\vld\include;..\..\..\ThirdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>E_SETTING_DYNAMIC_LIBRARY; WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>CorePch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

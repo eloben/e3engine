@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Private">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Private\Threads">
+      <UniqueIdentifier>{f9470a19-fa16-423f-a609-5e7a39db419a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Time">
+      <UniqueIdentifier>{f9db21e3-a759-419b-8127-b0900fcf9ef7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Public\Serialization">
+      <UniqueIdentifier>{5502f9b6-da38-4217-8c0e-7d7168926297}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Time">
+      <UniqueIdentifier>{bfc2fff4-87af-4560-a06a-212daed0ed08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Math">
+      <UniqueIdentifier>{cc8d2eca-fb4f-47a8-b6d0-e6dd898d4906}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Containers">
+      <UniqueIdentifier>{fdb3d296-7f37-4966-9114-6aba62a64669}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Threads\Win32">
+      <UniqueIdentifier>{178300a5-6ce1-4310-8974-264d5477fd57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Time\Win32">
+      <UniqueIdentifier>{7d4e7885-3041-4e59-9e14-f568bc4a8bf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Win32">
+      <UniqueIdentifier>{f5d44e1f-f5ca-44b1-a718-e40836c2adbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Threads">
+      <UniqueIdentifier>{1089f2c3-c207-4bc3-905c-932d2371593b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Text">
+      <UniqueIdentifier>{d42a26da-63ac-459b-b434-21917fa02dc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Text">
+      <UniqueIdentifier>{59727f0f-c13a-4af9-be11-f133f2d0cd0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\ThirdParty">
+      <UniqueIdentifier>{a72a3d45-b94b-4f8d-85dd-484b5e37cd52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Assertion">
+      <UniqueIdentifier>{f0957d7b-70b8-42e5-8aa9-73e64ab9da9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Serialization">
+      <UniqueIdentifier>{11ad358d-0336-48ad-a24b-6599a13fbe93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Memory">
+      <UniqueIdentifier>{15510d23-a70f-4324-a06e-e408260044fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\FileSystem">
+      <UniqueIdentifier>{7751eabc-263c-4da6-8b08-e4a7da3a6536}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\FileSystem">
+      <UniqueIdentifier>{44bf0b4a-0a4d-4a00-8d53-3c2ccba92cfe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\FileSystem\Win32">
+      <UniqueIdentifier>{f178146b-3ad5-40d8-b5a0-83b715fadb02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Memory">
+      <UniqueIdentifier>{b65b35a9-b76d-49c1-b1f3-b7591f7de0d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Math">
+      <UniqueIdentifier>{38fd3a9b-2c6a-46a8-a29d-353754815587}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Application">
+      <UniqueIdentifier>{4cf1ed9b-6fe8-4755-b270-078ca1f9b30b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Application">
+      <UniqueIdentifier>{46f48408-5d11-4ac1-95b6-1f418512b65b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\EventSystem">
+      <UniqueIdentifier>{d53dba1a-377e-406f-8de2-56afabe63abb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Application\Win32">
+      <UniqueIdentifier>{23fc225f-a1c5-41ee-b22a-47cb1396ec37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Threads\Msvc">
+      <UniqueIdentifier>{d10604b8-ab81-4ff6-a79f-eafb8c45e701}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Memory\Msvc">
+      <UniqueIdentifier>{f804c473-a137-4979-a165-7e1554764cf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Application\Win32">
+      <UniqueIdentifier>{7378f7ff-f734-4d31-890b-cee3b360197d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Msvc">
+      <UniqueIdentifier>{24a36e2b-2d38-4d7d-882a-40e16cc87b7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\ThirdParty\pugixml">
+      <UniqueIdentifier>{e498bf64-1ee7-410f-a468-5e20061aeca1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Include\Containers\List.h">
+      <Filter>Public\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Containers\Map.h">
+      <Filter>Public\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Containers\Pair.h">
+      <Filter>Public\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Containers\Queue.h">
+      <Filter>Public\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Containers\Stack.h">
+      <Filter>Public\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Win32\ComUtil.h">
+      <Filter>Public\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Math\Matrix4.h">
+      <Filter>Public\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Math\Quaternion.h">
+      <Filter>Public\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Math\Vector2.h">
+      <Filter>Public\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Math\Vector3.h">
+      <Filter>Public\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Math\Vector4.h">
+      <Filter>Public\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Time\Timer.h">
+      <Filter>Public\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Text\CharList.h">
+      <Filter>Public\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Text\String.h">
+      <Filter>Public\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Serialization\ISerializer.h">
+      <Filter>Public\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Threads\Lock.h">
+      <Filter>Public\Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Threads\Mutex.h">
+      <Filter>Public\Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Threads\Win32\MutexImpl.h">
+      <Filter>Private\Threads\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Threads\Thread.h">
+      <Filter>Public\Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Threads\Win32\ThreadImpl.h">
+      <Filter>Private\Threads\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Threads\IRunnable.h">
+      <Filter>Public\Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Threads\ConditionVariable.h">
+      <Filter>Public\Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Threads\Win32\ConditionVariableImpl.h">
+      <Filter>Private\Threads\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Threads\ThreadPool.h">
+      <Filter>Public\Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Threads\ThreadPoolWorker.h">
+      <Filter>Public\Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Assertion\Exception.h">
+      <Filter>Public\Assertion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Base.h">
+      <Filter>Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Assertion\Assert.h">
+      <Filter>Public\Assertion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Serialization\ByteSerializer.h">
+      <Filter>Public\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Serialization\StringSerializer.h">
+      <Filter>Public\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Serialization\XmlSerializer.h">
+      <Filter>Public\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Serialization\XmlSerializerImpl.h">
+      <Filter>Private\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Threads\Atomic.h">
+      <Filter>Public\Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Math\Box2.h">
+      <Filter>Public\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Math\Box3.h">
+      <Filter>Public\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Math\Plane.h">
+      <Filter>Public\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Math\Sphere.h">
+      <Filter>Public\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="..\Include\Math\Comparison.h">
+      <Filter>Public\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Math\Distance.h">
+      <Filter>Public\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Math\Projection.h">
+      <Filter>Public\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Math\Intersection.h">
+      <Filter>Public\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Singleton.h">
+      <Filter>Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Memory\Allocator.h">
+      <Filter>Public\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Memory\Factory.h">
+      <Filter>Public\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Math\Random.h">
+      <Filter>Public\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Math\Algorithm.h">
+      <Filter>Public\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Math\Hash.h">
+      <Filter>Public\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Text\Text.h">
+      <Filter>Public\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Math\Math.h">
+      <Filter>Public\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Time\Win32\TimeImpl.h">
+      <Filter>Private\Time\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Time\Time.h">
+      <Filter>Public\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Memory\Heap.h">
+      <Filter>Public\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Memory\Memory.h">
+      <Filter>Public\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\SafeCast.h">
+      <Filter>Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\FileSystem\File.h">
+      <Filter>Public\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\FileSystem\Win32\FileImpl.h">
+      <Filter>Private\FileSystem\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Text\StringImpl.h">
+      <Filter>Private\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Containers\DynamicArray.h">
+      <Filter>Public\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Containers\Array.h">
+      <Filter>Public\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Text\CharArray.h">
+      <Filter>Public\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\FileSystem\Path.h">
+      <Filter>Public\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\FileSystem\Archive.h">
+      <Filter>Public\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\IntrusivePtr.h">
+      <Filter>Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScopedPtr.h">
+      <Filter>Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\SharedPtr.h">
+      <Filter>Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\WeakPtr.h">
+      <Filter>Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Memory\GarbageCollection.h">
+      <Filter>Public\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Application\Application.h">
+      <Filter>Public\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\EventSystem\Event.h">
+      <Filter>Public\EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Application\Input.h">
+      <Filter>Public\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Application\Win32\InputImpl.h">
+      <Filter>Public\Application\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Msvc\PlatformBase.h">
+      <Filter>Public\Msvc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Threads\Msvc\AtomicImpl.h">
+      <Filter>Public\Threads\Msvc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Memory\Msvc\HeapImpl.h">
+      <Filter>Public\Memory\Msvc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Application\Win32\ApplicationImpl.h">
+      <Filter>Private\Application\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\CorePch.h">
+      <Filter>Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ThirdParty\pugixml\pugiconfig.hpp">
+      <Filter>Private\ThirdParty\pugixml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ThirdParty\pugixml\pugixml.hpp">
+      <Filter>Private\ThirdParty\pugixml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Application\InputManager.h">
+      <Filter>Public\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Application\Win32\InputManagerImpl.h">
+      <Filter>Private\Application\Win32</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Source\Threads\Mutex.cpp">
+      <Filter>Private\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Threads\Thread.cpp">
+      <Filter>Private\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Threads\Win32\ThreadImpl.cpp">
+      <Filter>Private\Threads\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Threads\ConditionVariable.cpp">
+      <Filter>Private\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Threads\Win32\ConditionVariableImpl.cpp">
+      <Filter>Private\Threads\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Threads\ThreadPool.cpp">
+      <Filter>Private\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Serialization\XmlSerializer.cpp">
+      <Filter>Private\Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Serialization\XmlSerializerImpl.cpp">
+      <Filter>Private\Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Text\String.cpp">
+      <Filter>Private\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Time\Time.cpp">
+      <Filter>Private\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Time\Win32\TimeImpl.cpp">
+      <Filter>Private\Time\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\FileSystem\File.cpp">
+      <Filter>Private\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\FileSystem\Win32\FileImpl.cpp">
+      <Filter>Private\FileSystem\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\FileSystem\Archive.cpp">
+      <Filter>Private\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Memory\Allocator.cpp">
+      <Filter>Private\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Math\Random.cpp">
+      <Filter>Private\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Application\Win32\ApplicationImpl.cpp">
+      <Filter>Private\Application\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Application\Application.cpp">
+      <Filter>Private\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\CorePch.cpp">
+      <Filter>Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ThirdParty\pugixml\pugixml.cpp">
+      <Filter>Private\ThirdParty\pugixml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Application\InputManager.cpp">
+      <Filter>Private\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Application\Win32\InputManagerImpl.cpp">
+      <Filter>Private\Application\Win32</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="eCore.rc" />
+  </ItemGroup>
+</Project>

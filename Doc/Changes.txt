@@ -1,0 +1,420 @@
+2014-Dec-14 [First e3project release]
+- [Refactor] [eGraphicsTest] tweaked samples.
+- [Refactor] [eEngine] Using raw pointers for binding methods
+- [Refactor] [eGraphics] Using raw pointers for binding methods
+- [Refactor] [eGraphics] IPipeline is merged into IDevice.
+- [Refactor] [eCore] GCPtr renamed to GCUniquePtr and GCRef renamed to GCWeakPtr.
+
+2014-Dec-6 [e3project Alpha fix: InputManager & DebugWindow]
+- [Design] eUtil is now eCore.
+- [Implement] [eEngineTest] DebugWindow: no has a proper independent input.
+- [Implement] [eEngineTest] Updated samples.
+- [Refactor] [eEngine] Moved InputManager to Core inside the Application namespace and made it a pimpl in favor of interface.
+- [Implement] [eEngine] CameraHandler: adapted it to new IWindow system and added SetActive to handle window switching.
+- [Implement] [eCoreTest] added ConditionVariable test.
+- [Implement] [eCore] Application: remade it to be able to instance IWindow instances which can receive OS events (windows).
+
+2014-Nov-24 [Bugfix]
+- Fixed a major bug which prevented samples to properly run in release version.
+2014-Nov-23 [Major update: Preliminar alpha: VS 2013 and C++11]
+- [Design] Removed using namespace from E libraries.
+- [Design] Removed namespace identation.
+- [Design] All GCRef based returns are const reference unless a temporary object is returned (factory objects). This means that non-const methods (that modify this state) also return also const GCRef references.
+- [Design] Scene is now a subnamespace of graphics (warning redo redo).
+- [Design] Removed object loading / unloading from IView and add it to a world instance.
+- [Design] Removed render logic from IView: ISceneManager is now responsible for the view rendering.
+- [Design] ISceneManager is independent from IRenderManager offering all the Scene functionality without the user having to call IRenderManager. This change incurs in a minimal additional indirection: GetTexture2D (to fill IMaterial parameters).
+- [Refactor] [eEngine] moved all Scene related objects into Scene namespace. Minor name refactor.
+- [Refactor] [eGraphics] IDeviceManager renamed to IDevice (warning redo). The justification is that managers are unique while a device is not as it depends on its implementation (theoretically you could instance more than one IDevice).
+- [Implement] [eEngine] HLSL: switch the shadow map sampler SampleComparisonState to do 4-sample interpolation in HW.
+- [Implement] [eEngine] HLSL: switch the shadow map sampler SampleComparisonState to do 4-sample interpolation in HW.
+- [Implement] [eEngine] Added IWorld.
+- [Implement] [eEngine] ForwardRenderer: added eSamplerIDTrilinearLessOrEqualClamp sampler for shadows.
+- [Implement] [eCore] Allocator: made eCore allocator unique. Thirdparty libraries no longer need to manually bind allocators to resolve inter-depenencies in memory allocation.
+- [Fix] [eEngine] CameraHandler: removed time scale in camera rotation.
+- [Fix] [eGraphics] DX11Viewport: change FindDisplayResolution to use UNORM_SRGB instead of UNORM as desired surface target.
+- [Fix] [eCore] Singleton: fixed all library singletons to be defined in a source file to guarantee unique instance across DLLs. Also added a comment in this regard.
+2014-Oct-30 [Major update: Forward renderer + light spot shadows]
+- [Design] All GCRef based function parameters are now const ref to avoid unnecessary copies.
+- [Design] For the same reason replaced all GCRef based return types for (when applicable): const reference (contained instance) or instance (factoy created objects). Take note than using const reference with GCRef allow using operator -> and hence non-const methods.
+- [Design] Moved all pipeline state tracking from eGraphics to eEngine (from IPipeline to IRenderManager) leaving Gpu leaner.
+- [Design] Moved IShaderTechnique (eEngine) functionality to IShader (eGraphics). Even Gpu's objective is to be lean. There is no need point on having a shader object representing just a stage (a whole shader program with the required stages makes more sense).
+- [Design] Moved rendering logic from IObject (restrictive) to IRenderer (flexible). IRenderer is responsible of the rendering of objects, interpreting also their components and material. IObject is solelly responsible for filling the needed data to buffers and issue draw commands.
+- [Design] ScenePipeline contains the common definitions for ISceneManager based rendering. Shader resources IDs and their shader registers are fixed and must be complied by new shaders to establish defining a common design pattern between IObjects, IRenderer and HLSL shaders.
+- [Fix] [eGraphics] DX11Pipeline: clear function now use a NULL SRV / UAV to properly clean resources.
+- [Fix] [eGraphics] DX11Context: fixed a problem on empty color target binding.
+- [Fix] [eGraphics] DX11Shader: now more than one shader include is properly handled.
+- [Refactor] [eEngineTest] Rename EngineUpdater to RenderTestApplication and adopted a Win::Application composition model to allow better window handling.
+- [Refactor] [eEngineTest] Rename SceneUpdater to SampleApplication and adopted a Win::Application composition model to allow better window handling.
+- [Refactor] [eEngineTest] Clean LightSpotSample and LightSpotShadowSample.
+- [Refactor] [eEngine] Removed context from PipelineState.
+- [Refactor] [eEngine] Removed PipelineState. Now definitions are included in IRenderManager
+- [Refactor] [eEngine] Removed IWindow.
+- [Refactor] [eEngine] Moved IRenderable, IUpdatable and ITransformable to IObject.
+- [Refactor] [eEngine] IRenderable::Render has no longer parameters and it is just responsible for filling buffers and issue draw commands.
+- [Refactor] [eEngine] Renamed IObjectComponent to IComponent (redo warning)
+- [Refactor] [eEngine] Renamed IObjectGroup to IGroup (redo warning)
+- [Refactor] [eEngine] Moved IComponent and IGroup to IObject.h due to inter/dependency.
+- [Refactor] [eEngine] IShaderTechnique has been removed in favor of IShader.
+- [Refactor] [eGraphics] IDeviceManager: GetPipeline now returns a const reference.
+- [Refactor] [eGraphics] IPipeline: restored deprecated methods as they are indeed required (redo warning)
+- [Refactor] [eGraphics] IContext renamed to IRenderTarget.
+- [Refactor] [eCore] Win::Application: Application::IUpdater to IWindowHandler.
+- [Refactor] [eCore] Win::Application: Clean up descriptor redundancy and window creation methods.
+- [Implement] [eEngineTest] SampleApplication: Added a DebugWindow to SampleApplication for render target debugging.
+- [Implement] [eEngineTest] added LightSpotShadowSample.
+- [Implement] [HLSL] added ForwardPass and ForwardLightPass shaders defining the required permutations by ForwardRenderer.
+- [Implement] [eEngine] added IRenderer interface.
+- [Implement] [eEngine] added ForwardRenderer.
+- [Implement] [eEngine] IRenderManager: added Bind and Update methods. Update methods offer automatic resource update for bound resources while not requiring parameters.
+- [Implement] [eEngine] IView: added SetViewContext method and getters.
+- [Implement] [eEngine] added ILightSpotShadowComponent.
+- [Implement] [eEngine] IComponent: added SetOwner / GetOwner to component.
+- [Implement] [eGraphics] IShader now has former IShaderTechnique functionality.
+- [Implement] [eCore] Win::Application: now allows child window creation without IWindowHandler
+- [Implement] [eCore] Win::Application: GetMainWindowDescriptor method added.
+- [Implement] [eCore] Map: changed Insert method return type from bool to Pair*;
+2014-Oct-17 [Major update: directional + point + spot lights]
+- [Refactor] [eEngineTest] adapted to changes below.
+- [Refactor] [eEngine] RenderManager: render is no longer multi-thread by default.
+- [Refactor] [eEngine] RenderManager: RenderTaskProcessor replaced by RenderCommandHandler.
+- [Refactor] [eEngine] IRenderable no longer is a component.
+- [Refactor] [eEngine] IObject has now public Update and Render methods (see below).
+- [Refactor] [eEngine] IDirectionalLight renamed to ILightDirectional.
+- [Refactor] [eEngine] ITransform renamed to ITransformable.
+- [Implement] [eEngineTest] added LightPointSample.
+- [Implement] [eEngineTest] added LightSpotSample.
+- [Implement] [eEngine] HLSL: added spot and point light support to the Normal and TextureNormal shaders.
+- [Implement] [eEngine] added ILightPoint.
+- [Implement] [eEngine] added ILightSpot.
+- [Implement] [eEngine] added RenderCommandHandler.
+- [Implement] [eEngine] added IUpdatable.
+- [Implement] [eEngine] ISceneManager: Update method added. It calls IView Update and Render. It is the place to track render state update in the future.
+- [Implement] [eEngine] IView: Update and Render methods added.
+- [Implement] [eEngine] DirectionalLight: fixed type. Occasionally created pure virtual function call.
+- [Implement] [eEngine] IObject: added GetParent / SetParent method.
+- [Implement] [eEngine] IObject: now implements IUpdatable, IRenderable and ITransformable interfaces.
+- [Implement] [eEngine] IObject: split Update and Render logic. The worldmatrix is no longer a render parameter. It is updated thanks to IObject::GetParent.
+- [Implement] [eCore] GarbageCollections: added raw pointer comparison to GCStaticPtr.
+- [Implement] [eCore] Math: added Transpose static method to Matrix4.
+
+2014-Oct-14 [Major update: Phong, Blinn-Phong and NormalizedBlinn lighting models + multiple lights]
+- [Refactor] [eEngine] RenderBase restored to previous PipelineState (redo warning).
+- [Implement] [eEngineTest] Added HighlightSample.
+- [Implement] [eEngineTest] Added PhongSample.
+- [Implement] [eEngineTest] Added MaterialSample.
+- [Implement] [eEngineTest] Updated DirectionalLightSample to 4 lights.
+- [Implement] [eEngine] HLSL: Implemented Phong lighting model.
+- [Implement] [eEngine] HLSL: Implemented Blinn lighting model.
+- [Implement] [eEngine] HLSL: Implemented normalized Blinn lighting model using Schlick Fresnel term approximation.
+- [Implement] [eEngine] Added multiple directional light support.
+- [Implement] [eEngine] Material: added predefined metallic materials.
+- [Implement] [eGraphics] DX11Shader: added file path support to shader includes.
+- [Implement] [eGraphics] Added gamma correction currently input is not gamme corrected and output is (see below)
+- [Implement] [eGraphics] DX11Texture2D: added gamma correction: file textures are not corrected to SRGB
+- [Implement] [eGraphics] DX11Viewport: added gamma correction: output is gamma corrected to SRGB.
+- [Implement] [eGraphics] Color: changed Zero static method by ZeroColor.
+- [Implement] [eCore] Math: changed Zero static methods by ZeroVector.
+2014-Oct-01 [Major update: garbage collected project rework + engine material + directional light]:
+- [Refactor] [eGraphics] IDevice has been renamed to IDeviceManager. All factory classes retrievable through E_API library calls should be managers and provide either interface references or interface GCRef objects (no more pointers)
+- [Refactor] [eCore] renamed GCFactory to GarbageCollection
+- [Implement] [eEngineTest] Added DirectionalLightSampler.
+- [Implement] [eEngine] IRenderManager now returns garbage collected reference pointers (instead of pointers).
+- [Implement] [eEngine] IInputManager now returns garbage collected reference pointers (instead of pointers).
+- [Implement] [eEngine] ISceneManager now returns garbage collected reference pointers (instead of pointers).
+- [Implement] [eEngine] eEngine now uses eGraphics global allocator.
+- [Implement] [eEngine] RenderManager: added Material and Light resource buffer.
+- [Implement] [eEngine] added IMaterial.
+- [Implement] [eEngine] added IDirectionalLight.
+- [Implement] [eEngine] Vertex: reworked vertex types to 4 pairs uncompressed / compreesed: Color, Texture, Normal, TextureNormal.
+- [Implement] [eGraphics] IDeviceManager now returns garbage collected reference pointers (instead of pointers).
+- [Implement] [eGraphics] Graphics and Device have been split: Graphics allows to get/set the library's global allocator.
+- [Implement] [eGraphics] Global: library has been translated to the new garbage collection system: eGraphics no longer provides any raw pointer.
+- [Implement] [eGraphics] Color now uses enum predefined colors and features an RGBA U32 conctructor and setter.
+- [Implement] [eGraphics] Color now has public rgba values.
+- [Implement] [eCore] GarbageCollection: added GCStaticPtr
+- [Implement] [eCore] GarbageCollection: removed operator bool from (operator bool() const) from GCRef as NULL comparison is easier to understand and avoids having to take into account automatic conversions to integral types (ssafe-bool idiom).
+- [Implement] [eCore] List: Copy now updates count to the max of the copied count and the current list count.
+
+2014-Sep-25 [Incomplete: GCFactory code without Engine / EngineTest update]:
+- [Refactor] [eCoreTest] Separated SharedPtr and IntrusivePtr tests.
+- [Refactor] [eCore] Factory: GenericFactory default id type changed to U32 from I32.
+- [Refactor] [eCore] Factory: IConcreteFactory renamed to IFactory.
+- [Implement] [eCoreTest] Added Matrix4 and Quaternion comparison test with DirectX equivalents.
+- [Implement] [eCoreTest] Added SmartPointer section.
+- [Implement] [eCoreTest] Enhanced SharedPtr test.
+- [Implement] [eCoreTest] Added WeakPtr test.
+- [Implement] [eCoreTest] Added GCFactory test.
+- [Implement] [eEngine] Added DirectLightSample.
+- [Implement] [eEngine] Added eNormalColor shader.
+- [Implement] [eCore] Math: added Normalize360 and Normalize180 functions.
+- [Implement] [eCore] Matrix4f: fixed rotations: adopted same rotation order as DX SDK Roll, Pitch Yaw
+- [Implement] [eCore] Quaternion: fixed rotations: adopted same rotation order as DX SDK Roll, Pitch Yaw
+- [Implement] [eCore] Quaternion: added operator[].
+- [Implement] [eCore] SharedPtr: fixed shared pointer to allow different deleter classes but only accepting the same counter type.
+- [Implement] [eCore] SharedPtr: improved SharedPtr allowing weak pointer referencing.
+- [Implement] [eCore] added WeakPtr
+- [Implement] [eCore] added GCFactory including GCPtr, GCRefm GCConcreteFactory and GCGenericFactory classes to allow garbage collected object instancing.
+
+2014-Sep-19 [More engine samples plus fixes]:
+- [Refactor] [Global] removed Lib folder and moved all binary generation to Bin folder (actually vertical sync visual glitches have gone :O)
+- [Refactor] [Global] Media folder has been renamed to Data.
+- [Refactor] [Global] All shaders have been move to Data/Shaders
+- [Implement] [eEngineTest] Added ChildMeshSample and MouseCameraSample.
+- [Refactor] [eEngine] moved shaders to Data/Shaders.
+- [Implement] [eEngine] Window: vertical syncronization is enabled by default however it was causing perceptible glitches with the MouseCameraSample. they are gone on disabling. However recent reestructuration have made the glitches disappear.
+- [Implement] [eEngine] View: fixed camera components to be properly loaded / unloaded.
+- [Implement] [eEngine] SceneManager: fixed object children and components removal on release.
+- [Implement] [eEngine] FirstPersonCameraHandler: added LogicHandler for camera movement.
+- [Implement] [eEngine] HLSL: added eColorNormal.hlsl shader
+- [Refactor] [eGraphicsTest] moved shaders to Data/Shaders/Test.
+
+2014-Sep-18 [Refactoring plus thread safety measures in ISceneManager: needs further testing before adding more]:
+- [Refactor] [eEngineTest] Global: refactored file directories: no longer under Engine/Test. There is only one Test no need to define a Test namespace like in eCore. Furtheremore all classes are defined within E namespace.
+- [Refactor] [eEngine] Global: refactored Scene to be independent of Graphics because: read "Doc/AboutScene.txt". Please stop refactoring this.
+- [Refactor] [eEngine] Global: refactored ISceneWindow, IScneObject, ISceneObjectComponent and ISceneObjectGroup to IView, IObject, IObjectComponent and IObjectGroup. It makes sense as they belong to Scene.
+- [Refactor] [eEngine] Global: ISceneManager belongs to Scene but the name remains. This can happen an it is ok. Another example is Graphics/Graphics.h
+- [Refactor] [eGraphicsTest] Global: refactored file directories: no longer under Graphics/Test. There is only one Test no need to define a Test namespace like in eCore. Furtheremore all classes are defined within E namespace.
+- [Implement] [eEngine] SceneManager: added mutex for garbage collection.
+
+2014-Sep-17 [Major changes: first Scene module version featuring SharedPtr + GC]:
+- [Refactor] [eEngine] Global: rename all descriptor variables to desc in method declarations
+- [Refactor] [eEngine] HLSL: added copyright header to hlsl files.
+- [Refactor] [eEngine] HLSL: added E_USE_VERTEX_COMPRESSION macro to allow shader permutations.
+- [Refactor] [eEngine] IRenderManager: corrected enum naming.
+- [Refactor] [eEngine] renamed IConstantArray to IConstantBuffer.
+- [Refactor] [eEngine] renamed IResourceArray to IResourceBuffer.
+- [Implement] [eEngine] ResourceArray and ConstantArray have eAccessFlagCpuWrite flag.
+- [Implement] [eEngine] Mesh: updated mesh to allow setting the vertex type and custom shader techniques.
+- [Implement] [eEngine] IRenderManager: defined the current system 6 vertex types.
+- [Implement] [eEngine] IRenderManager: now VertexArray is obtained by vertex type.
+- [Implement] [eEngine] IRenderManager: now shader technique is obtained by name.
+- [Implement] [eEngine] IRenderManager: added GetDefaultShaderTechnique using vertex type as identifier.
+- [Implement] [eEngine] IResourceBuffer: added AcquireIndex and ReleaseIndex methods to manage resource buffer instance addition and removal.
+- [Implement] [eEngine] IShaderTechnique: added IShader::CompilationDescriptor settings to descriptor (see below).
+- [Implement] [eGraphics] IShader: added CompilationDescriptor to allow defining shader model version and shader macros.
+- [Implement] [eGraphics] DX11Buffer: fixed SRV and UAV release before creation.
+- [Implement] [eGraphics] DX11Shader: added support for shader macros and shader model specification. Code has been optimized.
+- [Implement] [eCore] Map: minor improvement in resize condition.
+- [Implement] [eCore] Atomic: pre-increment and pre-decrement operators return references by default.
+- [Implement] [eCore] Atomic: added A32 and A64 types.
+- [Implement] [eCore] List: fixed removal methods to correctly call destructors on non-POD instances.
+- [Implement] [eCore] List: improved Trim and PopBack to be complementary.
+- [Implement] [eCore] List: improved Remove speed by using Memory::Move.
+- [Implement] [eCore] Memory: added Construct, Destruct and Move methods.
+- [Implement] [eCore] SharedPtr: fixed constructor and assigment operator from different types. It is now fixed for SharedPtr types using a specialized DeleterClass.
+- [Implement] [eCore] SharedPtr: added Reset method.
+
+2014-Sep-3 [Major changes: Assimp + DX11Shader include + FileSystem + New String]:
+- [Refactor] [eEngine] Global: all file path parameters now use FilePath instead of String.
+- [Refactor] [eGraphics] Global: all file path parameters now use FilePath instead of String.
+- [Implement] [eGraphics] DX11Shader: added support for shader includes.
+- [Refactor] [eCore] Global: namespace or class contract is defined at the relevant level (now namespace method contracts and class contracts are defined consistently).
+- [Refactor] [eCore] Global: renamed E_DEFAULT_xxx macros for E_INTERNAL_SETTING_xxx as it is a more adequate name.
+- [Refactor] [eCore] Global: namespace methods are now defined in the E namespace (easier to track and avoid excessive indentation in header defined methods). Class methods remain defined in their respective namespace.
+- [Refactor] [eCore] Containers: renamed Array to DynamicArray.
+- [Refactor] [eCore] Containers: renamed StaticArray to Array.
+- [Refactor] [eCore] Math: renamed Less to IsLess.
+- [Refactor] [eCore] Text: removed  CharArray.
+- [Refactor] [eCore] Text: renamed StaticCharArray to  CharArray.
+- [Refactor] [Global] Removed PostBuild event bats
+- [Refactor] [eCore] Text: removed String / WString all functionality is covered by StringBuffer / WStringBuffer
+- [Refactor] [eCore] Text: renamed StaticString / StaticWString to String / WString.
+- [Refactor] [eCore] Text: String implementation (based on pugi) has been moved to StringImpl. Impl files job is not only to abstract private from public but to abstract the implementation. Take not that the first cannot true for template implementations which must be defined publicly e.g. AtomicImpl.
+- [Implement] [eEngine] Added albedoSampler to Material.
+- [Implement] [eEngine] Integrated thirparty library: assimp.
+- [Implement] [eGraphics] IVertexLayout: added unigned type and ID semantic to host mesh id in vertices.
+- [Implement] [eGraphics] IPipeline: removed Unbind methods from interface (DX11 method implementation is deprecated).
+- [Implement] [eGraphics] IPipeline: restored BinShaderInput with IResource parameter (although kept IBuffer* and ITexture* ones). This method is needed as PipelineState for example does not differentiate between IBuffer or ITexture2D when binidng shader resources.
+- [Implement] [eGraphics] DX11Buffer: fixed buffer finalization: all DX resources are correctly released.
+- [Implement] [eGraphics] DX11Buffer: fixed buffer initialization: structured buffers can be GPU read only now.
+- [Implement] [eGraphics] DX11Pipeline: fixed IBuffer input parameter Bind methods to check first for updated buffer (caused DX11 bind warning).
+- [Implement] [eGraphics] Added default ISampler::Descriptor.
+- [Implement] [eCore] Containers: Array has its Size template argument as constant: kSize.
+- [Implement] [eCore] Containers: removed growth factor in favor of template argument GrowthPercentage from List, Stack and Queue.
+- [Implement] [eCore] Containers: removed max occupancy percentage member in favor of equivalent template argument.
+- [Implement] [eCore] Containers: added internal settings macros for List & Queue GrowthPercentage and Map MaxOccupancyPercentage.
+- [Implement] [eCore] Containers: added SetCount method to List.
+- [Implement] [eCore] Filesystem: added file system utilities to manage files and directories.
+- [Implement] [eCore] Math: added Swap to Comparison.
+- [Implement] [eCore] Math: added Half to Comparison.
+- [Implement] [eCore] Math: moved Comparer to Algorithm and added Sorting::SwapIfSmaller to avoid double comparison in some sorting cases.
+- [Implement] [eCore] Memory: fixed Heap aligned method definitions.
+- [Implement] [eCore] Text: CharArray has its Size template argument as constant: kSize.
+- [Implement] [eCore] Text: added Reserve and EnsureSize methods to CharList. Some redundant methods have been removed as covered by operators (such IsEqual)
+- [Implement] [eCore] Text: added default minimum size to CharList (same as Map)
+- [Implement] [eCore] Text: extended UTF8 - Wide character conversion to cover all String sizes (CharArray based with char / wchar_t).
+- [Implement] [eCore] Win32: changed Application window creation flags: removed WS_OVERLAPPED and WS_OVERLAPPEDWINDOW due to artifacts with DirectX in favor of WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX
+2014-Aug-24 [First eEngine version]:
+- [TODO] [eEngine] ensure thread safety when manipulating ISceneObject properties outside the render thread (in the main / logic thread).
+- [TODO] [eEngine] fix ConstantArrayTransform dependency of mesh objects (currently mesh is just overriding the buffer with a world matrix).
+- [Refactor] [eEngine] Renamed IWindows to IViewWindow to avoid method name collisions with Win32
+- [Refactor] [eGraphics] IBuffer: methods AddData, ClearData, RemoveData, ... have been renamed to Add, Set, Remove, ...
+- [Refactor] [eGraphics] DX11Buffer: renamed mReadyFlag to mPendingDataFlag which makes more sense.
+- [Refactor] [eGraphics] Renamed ResourceFactory to IResourceFactory
+- [Refactor] [eGraphics] Changed String for StaticString in all classes.
+- [Refactor] [eCore] Renamed UtilitiesPch to CorePch
+- [Refactor] [eCore] Base: changed E_DECLARE_POD macro: now it has to be defined in the global namespace.
+- [Implement] [eEngineTest] First sample EngineUpdater updated. Now it is using engine structures.
+- [Implement] [eEngine] First system shaders version. As HLSL uses column major ordering but Matrix4 is row-major, row-major logic including row vectors and left handed coordinates system are chosen. For this reason #pragma pack_matrix (row_major) is used in all shaders for consistency.
+- [Implement] [eEngine] First stable RenderManager implementation. RenderManager allows custom render command definition and manual instancing of GPU resource through IDevice or automatic render through IViewport load object operations.
+- [Implement] [eEngine] scene object component model added to RenderManager.
+- [Implement] [eEngine] Input and InputManager added.
+- [Implement] [eEngine] RenderManager uses a custom rendering thread triggered by IViewport on object load. Logic can be added and run in the render through components or executed in the main thread.
+- [Implement] [eEngine] IViewport reworked to allow automatic rendering of loaded objects.
+- [Implement] [eEngine] Added Camera and Mesh scene objects.
+- [Implement] [eEngine] Added VertexArray and ConstantArray.
+- [Implement] [eEngine] Simplified RenderTaskProcessor due to DX11Pipeline changes.
+- [Implement] [eGraphics] Added GetVertexSize to IVertexLayout::Descriptor.
+- [Implement] [eGraphics] Color: is now POD.
+- [Implement] [eGraphics] Color: added comparion and access operators.
+- [Implement] [eGraphics] Color: added Red, Green and Blue colors.
+- [Implement] [eGraphics] IBuffer: added Clear method.
+- [Implement] [eGraphics] IPipeline: added a contract for bind operations.
+- [Implement] [eGraphics] DX11Pipeline: now checks for already bound resources or updated buffers before binding.
+- [Implement] [eGraphics] DX11Buffer: buffer checks max DX11 allowed constant buffer element count and maximum checked buffer size of 128 MB
+- [Implement] [eGraphics] DX11Buffer: method Update now on pending data successfully updated to DX buffer.
+- [Implement] [eGraphics] DX11Viewport: fixed FindDisplayRefreshRate.
+- [Implement] [eCore] Atomic: no longer requires a POD typename.
+- [Implement] [eCore] Map: no longer requires a POD type key / value.
+- [Implement] [eCore] Math: Vector4, Vector3, Vector2 and Matrix4 const version of operator[] returns now a const reference.
+- [Implement] [eCore] Vector2, Vector3, Vector4 , Matrix4, Quaternion, Sphere, Plane, Box2 and Box3 type definitions are now POD
+- [Implement] [eCore] Vector2, Vector3, Vector4 , Matrix4, Quaternion have a Set method.
+- [Implement] [eCore] Vector2, Vector3, Vector4 have a single scalar comparison operator and setter.
+- [Implement] [eCore] Fixed Matrix4 multiplication error.
+- [Implement] [eCore] Singleton: Remove E_DECLARE_API_SINGLETON_FRIENDLY macro and added E_DEFINE_SINGLETON_ONLY
+2014-Aug-12:
+- [Info] eCore Containers, Memory and Threads have been reviewed and improved; eGraphics is completed and eEngine core functionality too (eEngine includes some scene manager definitions but that part is a work on progress and at this point should be ignored).
+- [Refactor] [Global] Renamed thirparty vld-2.3 dir to vld. I have been testing other versions and it gets cumbersome to update the whole project when trying a new version. Also reviewed solution project settings.
+- [Implement] [eCore] Win32: PlatformBase: removed (for the time being) warning disable conditional expression is constant. All current warnings have been resolved using Memory::Smart (see below).
+- [Implement] [eCore] Memory: added Smart class to add at compile time POD / non-pod types copy and construct semantics.
+- [Implement] [eCore] Memory: Allocator includes Memory::Deleter. Smart pointer classes include now a DeleterClass template parameter defaulted to Memory::Deleter.
+- [Refactor] [Global] classes enum must be self-defined. Inside a class use a meaningful but non-redundant name ITexture2D::Type vs ITexture2D::TextureType (to having colliding inherited types use the parent interface).
+- [Refactor] [Global] renamed mPtr to mpPtr.
+- [Refactor] [eGraphics] IBuffer: BufferType renamed to Type.
+- [Refactor] [eGraphics] ITexture2D: TextureType renamed to Type.
+- [Refactor] [eCore] Base: removed Types which is now integrated in Base. The reasoning is that it does not make sense to use the library without types.
+- [Refactor] [eCore] List: RemoveValue and RemoveValueFast have been renamed to RemoveIf and RemoveIfFast to be coherent with Map::RemoveIf
+- [Refactor] [eCore] Memory: renamed old Memory to Heap and MemImpl has been replaced with HeapImpl.h
+- [Refactor] [eCore] Text: FindLength renamed to GetLength.
+- [Refactor] [eCore] Threads: Reviewed Atomic and MutexImpl based on www.preshing.com. Current Windows Mutex and Atomic implementation is performant enough.
+- [Implement] [eCore] Atomic: extended atomic for U32 and U64 using lock-free methods instead of mutex (based on Jeff Preshing blog). Have tested std::mutex and std::atomic and E::Mutex and E::Atomic (lock-free types) are better performant.
+- [Implement] [eCore] Memory: reworked Memory to differentiate between POD and non-POD types automatically. Some Allocator functionality has been moved to Memory.h (such as global new / delete operator definition).
+- [Implement] [eCore] Memory: removed E_ALLOCATE / E_DEALLOCATE in favor of E_NEW and E_DELETE which now help to identify non-defined default constructors in classes / struct which could be POD.
+- [Refactor] [eCoreTest] SmartPointer test moved to threads.
+2014-Aug-07:
+- [Implement] [Global] eEngine is the first library using C++ 11 auto.
+- [Implement] [Global] eCore incorporates C++ 11 static_assert for pod type and char type checking in compile time.
+- [Implement] [Global] Adopted C++11 default initialization for arrays in the initialization list (removed E::Memory::Zero calls in POD structs containing pointers)(look Q&A). VS 2010 has a debug warning for this case which is now disabled in PlatformBase.h (4531).
+- [Implement] [eEngineTest] First working demo: green triangle demo!
+- [Implement] [eEngine] IEngine: interface now provides getters to unique IRasterState, IDepthStencilState and IBlendState.
+- [Implement] [eEngine] IEngine: implemented in separate thread rendering.
+- [Refactor] [eEngine] EngineProvider renamed to Engine.
+- [Refactor] [eGraphics] IDrawContext: class renamed to IContext.
+- [Refactor] [eGraphics] DevideProvider renamed to Graphics.
+- [Implement] [eGraphics] IDevice: IBuffer and IDrawContext only offer descriptor methods for creation (simplification). Although initially it was intended to add more logic to Gpu. It defeats its original gola provide a Gpu device abstraction. All logic then must be moved to higher libraries such as Engine
+- [Implement] [eGraphics] IVertexPrimitive: this class has been removed in favor of enum VertexPrimitive which is used as part of the Draw call in IDrawContext (this way is compatible with OpenGL draw call model and overhead is minimal).
+- [Implement] [eGraphics] IContext: Added DrawIndirect to IDrawContext although is still unimplemented.
+- [Implement] [eCore] Memory: Simplified memory util. Pod type check is no longer performed in Memory as it must provide functionality to third party classes and structs which may not implement our system PodType traits. Also modified Zero to work like Copy
+- [Implement] [eCore] Memory: Added Construct and Destruct template methods.
+- [Implement] [eCore] Allocator: methods adapted to Memory modifications. Zero count is no longer checked or asserted in Allocate.
+- [Implement] [eCore] Map: MapHasher includes all template methods (for easier understanding). However the specialization method definition may differ slightly (this is legal). A comment has been added
+- [Implement] [eCore] Types: PodTypeTraits refactored to mimic std::is_pod. IsPod() method is removed an 4127 warning (constant expression) has been disabled.
+- [Implement] [eCore] Types: static_assert is now used to ensure podness or char typeness.
+- [Implement] [eCore] Base: Changed pimpl idiom implemention. Now macro E_PIMPL enforces an Impl inner class definition of those classes defining E_PIMPL e.g. class Mutex must define class Mutex::Impl.
+- [Implement] [eCore] PlatformBase: have been refactored. PlatformBase requires _MSC_VER as only Win32 VS solution is provided. Minimum version updated to VS 2010 as C++ auto is used (maybe changed to VS 2012 when C+11 is fully adopted).
+- [Implement] [eCore] PlatformBase: added pragma disable warnings for POD types and constant expression.
+- [Implement] [eCore] Assert: added default E_ASSERT_MSG_TODO in Assert.h
+- [Implement] [eCore] Threads: Added a global thread pool.
+- [Implement] [eCore] Threads: added a GetProcessorCount static method to Thread.
+- [Implement] [eCore] Threads: modified CleanUp to have a terminate flag. Now cleanup just destroys idling threads by default. The old Terminate behavior is achieved with terminate = true. This new behavior aids the global thread pool to be shared among different EXE / DLLs while allowing each process to clean up the threads used.
+- [Implement] [eCore] List: Default initializes non-POD element types on Resize.
+- [Implement] [eCore] Queue: Fixed HasValue method.
+- [Implement] [eCore] Queue: Default initializes non-POD element types on Resize.
+- [Implement] [eCore] Map: Map now enforeces both KeyType and ValueType to be POD.
+- [Implement] [eCore] Math: improved assertion macros.
+- [Implement] [eCore] String: StaticString and StaticWString are now POD.
+- [Refactor] [eCore] Math: renamed MathUtil to Memory
+- [Refactor] [eCore] Memory: renamed MemoryUtil to Memory
+- [Refactor] [eCore] Text: renamed TextUtil to Text
+- [Refactor] [eCore] Threads: All Thread classes belong to Threads namespace.
+- [Refactor] [eCore] Threads: ThreadPool::Terminate removed in favor of ThreadPool::CleanUp.
+
+2014-Jul-30:
+- [Implement] [eCore] Restored __VA__ARGS__ in favor of E_ARGS. It seems this macro cannot be redefined.
+- [Implement] [eCore] Refactored map based on: http://preshing.com/20130107/this-hash-table-is-faster-than-a-judy-array/
+- [Implement] [eCore] Added MapHasher to map to correctly handle 32 and 64 bit keys including pointer types
+- [Implement] [eCoreTest] Updated to reflect above changes.
+
+2014-Jul-24:
+- [CodingStandard] Adopted one line for loops if there is only one operation: e.g. while (ComparerClass<T>::Less(ptr[++leftIndex], pivot)) if (leftIndex == endIndex) break;
+- [CodingStandard] Adopted one line for empty loops: e.g. while (ComparerClass<T>::Less(pivot, ptr[--rightIndex])) continue;
+- [CodingStandard] Adopted one line for conditionals when there is no else clause: e.g. if (leftIndex >= rightIndex) break;
+- [Implement] [eCore] Fixed Algorithm.hpp to allow algorithms work with sub sections of an array.
+- [Implement] [eCore] Fixed assertion methods. Now they do not work as expected (empty in release). Added E_DEBUG to check for debug
+- [Implement] [eCore] Added STL compatible iterator methods begin() / end() for List.
+- [Implement] [eCore] Added STL compatible iterator methods begin() / end() for Map.
+- [Implement] [eCore] Added STL compatible iterator ++ for Map.
+- [Refactor] [eCore] Refactored List. Removed const methods with Iterator as parameter (do not make sense having a ConstIterator). Removed GetNext. Removed ConstIterator version from Remove method (modification is always expected). As a rule const methods do not require Iterator parameter version and non-const methods do not require a ConstIterator version.
+- [Refactor] [eCore] Refactored Map methods: as  rule const methods do not require Iterator parameter version and non-const methods do not require a ConstIterator version.
+- [Research] Struct iterator is not necessary slower (there was a measurment mistake due to E_ASSERT working in release mode) for List, however does not make sense to overdo if a typedef iterator works.
+- [Research] Struct iterator is not necessary slower (there was a measurment mistake due to E_ASSERT working in release mode) for Map however FindValue is relatively faster than Find (iterator version).
+- [Research] One size does not fit all. Do not try to force the same structure. Current List / Map containers have different iterator implementations and this is OK. They are optimized for speed when working with pointers / POD types and they do not intend to substiture other more generic (but slower) containers. You cannot have it all :)
+
+2014-Jul-15:
+- [Refactor] [eEngineTest] Refactored directories Test/Engine to Graphics/Test
+- [Refactor] [eGraphicsTest] Refactored directories Test/Gpu to Graphics/Test
+- [Implement] [eGraphics] Added accessors to IPipeline to check the current pipeline state.
+- [Implement] [eCore] Added the Algorithm.hpp file featuring the following sorting algorithms: insertion sort, heap sort, quick sort, quick sort 3-way, quick sort dual pivot and intro sort and sorting network (probably to be eliminated due to poor performance).
+- [Implement] [eCoreTest] Added algorithm test.
+
+2014-Jul-07:
+- [Implement] [eGraphicsTest] Adapted samples to the new Gpu library IPipeline rework.
+- [Implement] [eGraphicsTest] Reworked test application to include multiple viewports and reduced code footprint.- 
+- [Implement] [eGraphicsTest] Implement render to texture sample
+- [Implement] [eGraphicsTest] Implement render depth to texture sample
+- [Implement] [eGraphics] Reworked IDevice to allow control of the pipeline and a unique place to bind resources: IPipeline
+- [Implement] [eGraphics] IDeviceInput, IDeviceState and IShaderInput disappear in favor of a leaner structure.
+- [Implement] [eGraphics] IVertexBuffer, IIndexBuffer, IConstantBuffer and IResourceBuffer disappear. IBuffer and ITexture2D now inherit from IResource.
+- [Implement] [eGraphics] Reworked Texture2D class texture array handling.
+- [Implement] [eGraphics] Fixed DX11Texture2D and DX11DrawContext to allow depth buffer sampling.
+- [Implement] [eGraphics] Added GDX11Device and GDX11DeviceContext macros for GDX11Core accessors.
+- [Implement] [eCore] Reworked Win::Application to allow child window creation.
+- [Implement] [eCore] Updated List and Map to allow backwards iteration.
+- [Implement] [eCore] Fixed List GetBack IsValid and GetBegin
+- [Implement] [eCore] Updated GenericFactory and ConcreteFactory to include a CleanUp method instead of manually giving the live object list. An accessor to retrieve the live object list count is added though.
+- [Implement] [eCoreTest] Added list iteration tests.
+
+2014-Jun-27:
+- [CodingStandard] Adopted namespace organization model (like boost libraries)
+- [CodingStandard]Adopted inline writing for function that can be writen in a single line (makes sense right?).
+- [Refactor] Reorganized Engine library to Graphics namespace.
+- [Implement] Engine is reworked to follow a simpler RenderCommand methodology in favor of creating an additional indirection layer.
+- [Refactor] Reorganized Gpu library to Graphics namespace and removed the Gpu prefix to filenames.
+- [Implement] Replaced IProgram (former IGpuProgram) for IShader. IShader now represents a concrete shader stage shader program.
+- [Refactor] Renamed IContext (former IGpuContext) for IDrawContext (DX11 implementations classes have been changed accordingly).
+- [Refactor] Reorganized Util library: all class groups which contain a namespace now have all of theire classes inside that namespace.
+- [Refactor] Reorganized Memory to Memory namespace.
+- [Refactor] Smart pointer classes and Singleton have been move to root.
+- [Refactor] Reorganized Math to Math namespace: mathematical type classes (e.g. Math::Vector) have a typedef inside E (e.g. E::Vector3f)
+- [Refactor] Reorganized Text to Text namespace: string type classes (e.g. Text::CharList) have a typedef inside E (e.g. E::StringBuffer)
+- [Refactor] Reorganized Time to Time namespace: time type Time::Value has a typedef inside E: TimeValue.
+- [Implement] Removed serialization methods from utility library structs (their members are public so it is left to the user).
+
+2014-Jun-18:
+- Fixed dll projects to produce debug information
+- Improved SharedPtr to allow comparisons with raw pointers. SharedPtr no longer includes GetPtr accessors. Instead a new method RemoveOwnership has been added to allow external contained pointer memory release. IsUnique requires now to have a valid pointer member and IsVoid has been removed.
+- Add a Factory class for single type objects
+- Fixed ThreadPool to use GAllocator for worker thread allcoations (instead of defualt new / delete)
+- Reorganized all allocation classes and definitions inside Allocator.h (in a similar fashion as Factory.h). Therefore IAllocator.h, DefaultAllocator.h, AlignedAllocator.h and ProxyAllocated.h have been removed (its content is included in Allocator.h).
+- Remove pointer reference from GenericFactory (no longer objects are set to NULL on object Destroy.
+- Added Create, Destroy, Allocate and Deallocate methods based on IAllocator to the Memory namespace.
+- Remove global allocator singleton in favor of an AllocatorProvider plus E_API global allocation methods in order to fix inter exe / dll singleton duplicates
+- Reworked and added new macros E_ALLOCATE, E_DEALLOCATE, E_CREATE, E_DESTROY based on the corresponding Memory methods.
+- Cleared all library allocations: no default new / delete present (except in third party libraries) or through the ProxyAllocated class for pimpls.
+- Removed Pimpl in favor of ProxyAllocated
+- Added the E_SETTING_OVERRIDE_NEW_AND_DELETE macro to override new and delete operators
+- Added allocation test
+- Reworked all Util global singletons to fix exe / dll singleton duplicates. Now E_API functions within a child namespace Global are included (e.g. Memory::Global) to access the singletons.
+- Removed E_SETTING_DEFAULT_STRING_SIZE
+

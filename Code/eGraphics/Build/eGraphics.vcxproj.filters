@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Private">
+      <UniqueIdentifier>{b2e48c2c-5f9f-4dde-86d0-6c60f7c3a277}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public">
+      <UniqueIdentifier>{49db8827-7e3b-46ad-a3c6-51a2ac1d7f7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Graphics">
+      <UniqueIdentifier>{96978907-eb47-4f5d-8c73-ab0a1e58acfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Graphics">
+      <UniqueIdentifier>{ca67cc45-8bf6-4e3c-b39b-d92982a2b3c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Graphics\DX11">
+      <UniqueIdentifier>{f12fd214-4bde-466a-a048-283af0cf27ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Graphics\ThirdParty">
+      <UniqueIdentifier>{c79a6e15-6579-4d8e-a1b2-263247c14f20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Graphics\ThirdParty\DirectXTex">
+      <UniqueIdentifier>{c59d674c-2864-4289-9e31-5ef1bac8874d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Include\GraphicsPch.h">
+      <Filter>Public</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="..\Include\Graphics\IViewport.h">
+      <Filter>Public\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Graphics\IBlendState.h">
+      <Filter>Public\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Graphics\IBuffer.h">
+      <Filter>Public\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Graphics\IDepthStencilState.h">
+      <Filter>Public\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Graphics\IRasterState.h">
+      <Filter>Public\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Graphics\IShader.h">
+      <Filter>Public\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Graphics\ITexture2D.h">
+      <Filter>Public\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Graphics\IVertexLayout.h">
+      <Filter>Public\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Graphics\DX11\DX11Base.h">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Graphics\DX11\DX11BlendState.h">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Graphics\DX11\DX11Buffer.h">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Graphics\DX11\DX11Core.h">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Graphics\DX11\DX11DepthStencilState.h">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Graphics\DX11\DX11RasterState.h">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Graphics\DX11\DX11Shader.h">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Graphics\DX11\DX11Texture2D.h">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Graphics\DX11\DX11VertexLayout.h">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Graphics\DX11\DX11Viewport.h">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Graphics\Color.h">
+      <Filter>Public\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Graphics\DX11\DX11Sampler.h">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Graphics\ISampler.h">
+      <Filter>Public\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Graphics\IPipeline.h">
+      <Filter>Public\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Graphics\DX11\DX11Pipeline.h">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Graphics\IResource.h">
+      <Filter>Public\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Graphics\VertexPrimitive.h">
+      <Filter>Public\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Graphics\Device.h">
+      <Filter>Public\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Graphics\IRenderTarget.h">
+      <Filter>Public\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Graphics\DX11\DX11RenderTarget.h">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Graphics\IDevice.h">
+      <Filter>Public\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Graphics\DX11\DX11Device.h">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ThirdParty\DirectXTex\WICTextureLoader.h">
+      <Filter>Private\Graphics\ThirdParty\DirectXTex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ThirdParty\DirectXTex\DDSTextureLoader.h">
+      <Filter>Private\Graphics\ThirdParty\DirectXTex</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Source\GraphicsPch.cpp">
+      <Filter>Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Graphics\DX11\DX11BlendState.cpp">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Graphics\DX11\DX11Buffer.cpp">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Graphics\DX11\DX11DepthStencilState.cpp">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Graphics\DX11\DX11RasterState.cpp">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Graphics\DX11\DX11Shader.cpp">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Graphics\DX11\DX11Texture2D.cpp">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Graphics\DX11\DX11VertexLayout.cpp">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Graphics\DX11\DX11Viewport.cpp">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Graphics\DX11\DX11Sampler.cpp">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Graphics\DX11\DX11Pipeline.cpp">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Graphics\Device.cpp">
+      <Filter>Private\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Graphics\DX11\DX11RenderTarget.cpp">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Graphics\DX11\DX11Device.cpp">
+      <Filter>Private\Graphics\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ThirdParty\DirectXTex\DDSTextureLoader.cpp">
+      <Filter>Private\Graphics\ThirdParty\DirectXTex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ThirdParty\DirectXTex\WICTextureLoader.cpp">
+      <Filter>Private\Graphics\ThirdParty\DirectXTex</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="eGraphics.rc" />
+  </ItemGroup>
+</Project>

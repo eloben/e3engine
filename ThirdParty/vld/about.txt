@@ -1,0 +1,2 @@
+Visual Leak Detector v2.4rc2
+https://vld.codeplex.com/

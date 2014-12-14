@@ -1,0 +1,1114 @@
+Q: Does make sense to add the texture sampler descriptor to the IGpuTexture2D? 
+A: Yes
+
+Q: Can a texture hace multiple samplers?
+A: Yes but you can assume a sampler per texture
+
+Q: Which is the best way to use GPU buffers (vertex, index, constant)?
+A: the one that minimizes the API call (this applies for every API related class)
+
+Q: Is is worth to use a big buffer (e.g. vertex buffer) to store all geometry?
+A: Yes
+
+Q: How would you classify these massive buffers?
+A: By vertex layout description and by static / dynamic geometry?
+
+Q: What do you mean by static / dynamic geometry?
+A: Static geometry is geometry with a fixed vertices. Otherwise is dynamic (vertex position / count can change)
+
+Q: SmartPointers, why not using a static variable for reference counting?
+A: Because a static variable is shared among all instances of your class. You only want to increase the reference
+count of smart pointers sharing the same instance.
+
+Q: Is there any difference in using the initialization list or assignment for primitive types in the constructor?
+A: There is no performance difference if a variable is of some built-in/intrinsic type (POD), such as int or char* or float. But even in these cases, my personal preference is to set those data members in the initialization list rather than via assignment for consistency. Another symmetry argument in favor of using initialization lists even for built-in/intrinsic types: non-static const and non-static reference data members can't be assigned a value in the constructor, so for symmetry it makes sense to initialize everything in the initialization list. Finally when we consider non-POD types by default the no-argument constructor is called. Using an initialization list you are able to choose which constructor is called.
+
+So to answer the question, there is a performance difference, but only when initializing non-POD types.
+
+
+Q: Can you tell me the problem with interfaces and templates: How can I combine them?
+A: you can create a templated interface using template <class T> MyInterface and use T in your interface method declarations. The template will be generated at compile time and the interface deduces at run time. You cannot create an interface with a templated member method: template <typename T>virtual void MyMethod(T* p). This is because is too difficult to manage a vtable with all different possible types in a method. However the first option is ok because all the interface class is templated.
+
+Q: Const-correctness, Why can I change the content of a pointer member variable inside a const method?
+A: The constness of a class method only affects the this pointer of the class. It makes the type of this a const T* instead of just T*. This is not a 'deep' const though - it only means the members themselves cannot be changed, but anything they point to or reference still can.
+
+Q: Const-correctness. Can I use a const_cast to return a non-const pointer from a const method?
+A: You can ask these two questions: 1. Does my method modify the object? 2. If I had a const object returning the non-const pointer would it be possible to alter the const object through the pointer? If the answer is "No" to both questions you can safely use the const_cast.
+
+Q: A classic STD vector vs queue?
+A: The C++ Standard, in section 23.1.1, offers some advice on which containers to prefer. It says: "vector is the type of sequence that should be used by default... deque is the data structure of choice when most insertions and deletions take place at the beginning or at the end of the sequence."
+
+Q: an enum is unsigned or signed int?
+A: neither of both, the standard says that it is implementation-defined which integral type is used as the underlying type for an enum, except that it shall not be larger than int. The C++ compiler will not automatically convert an int expression to a temporary enum type. Be sure your integer is a valid enumeration value!
+
+Q: Which is best way to remove an element from a vector?
+A: v.erase( std::remove( v.begin(), v.end(), element ), v.end()); 
+
+Q: Which is best way to remove several elements from a vector?
+A: v.erase( std::remove_if(v.begin(), v.end(), myMethod), v.end());
+
+Q: I did not like your answer, what if I need way to remove several elements from a vector on a condition?
+A: v.erase( std::remove_if(v.begin(), v.end(), MyFunctorClass(conditionElement)), v.end());
+Define a class implementing: operator bool operator(Element e) const
+
+Q: Can I declare templates in a header file and define them in the source file?
+A: as long as the template functions are private is ok. These templates will report no linking errors without definition due to the fact that they are used only in the cpp where all the used template types are specified.
+
+Q: About includes, what policy do you follow?
+A: forward declare whenever possible, include all necessary files without assuming another included header lready is including a required header.
+
+Q: Is this loop ok: for (U32 j = kGridSize - 1; j >= 0; --j) {}
+A: No, beware of using decremental loops with unsinged integers. The next j-- after j = 0 will reset it to MAX(U32)
+
+Q: friend operator << how to declare it?
+A: Inside the class declaration: friend MyStreamClass& operator <<(MyStreamClass& target, const MyClass& source);
+
+Q: Can I declare it outside the class?
+A: Yes, if you do not require to access private members.
+
+Q: What about friend operators with templated classes?
+A: When using templates it is a bit more difficult, the most if you separate the declaration from the implementation. There are 3 possibilities:
+
+1. Declare a templated version of the friend operator (not the best encapsulation):
+
+	template <typename T>
+	struct Vector2
+	{
+            template <typename U> // All instantiations of this template are my friend	
+	    friend StringBuffer&  operator<< (StringBuffer& target, const Vector2<U>& source);
+	}
+
+	...
+
+	template <typename U>
+  	inline StringBuffer& operator<<(StringBuffer& target, const Vector3<U>& source)
+  	{
+	  // Can access all Vector2<I32>, Vector2<F32>... regardless of what T is
+  	  ...
+  	  return target;
+  	}
+
+2. Predeclare the class and the operator to be friend (definition cannot be inline):
+
+	template <typename T>
+	struct Vector2;
+	template <typename T>
+	StringBuffer&  operator<< (StringBuffer& target, const Vector2<T>& source);
+
+	template <typename T>
+	struct Vector2
+	{
+   	    friend StringBuffer&  operator<< <> (StringBuffer& target, const Vector2<T>& source);
+	}
+
+	...
+
+	template <typename T>
+  	StringBuffer& operator<<(StringBuffer& target, const Vector3<T>& source)
+  	{
+ 	  // Cannot be inline!
+  	  ...
+  	  return target;
+  	}
+
+3. Define the operator to be friend in the class body (best imo):
+
+	template <typename T>
+	struct Vector2
+	{
+	    inline friend StringBuffer&  operator<< (StringBuffer& target, const Vector2<T>& source)
+	    {
+              ...
+	      return target;
+            }
+	}
+
+http://www.parashift.com/c++-faq/template-friends.html
+
+Q: Can I implement a public virtual method as private in a derived class?
+A: Yes. The behavior is correct. Whenever you declare your function as "virtual", you instruct the compiler to generate a virtual call, instead of the direct call to this function. Whenever you override the virtual function in the descendant class, you specify the behavior of this function (you do not change the access mode for those clients, who rely on the "parent's" interface). Changing the access mode for the virtual function in the descendant class means that you want to hide it from those clients, who use the descendant class directly (who rely on the "child's" interface). However take into account that if the derived class is intended to be used through its interface it is not a good practice. Those who expect a fully functional parent interface should receive it.
+
+Q: How can I make a template of a template?
+A: Consider the following:
+
+template <typename T, template<typename = T> class AllocatorClass = Allocator>
+struct A
+{
+  AllocatorClass<T> a;
+};
+
+template<template<typename = I32> class AllocatorClass = Allocator>
+struct B
+{
+  AllocatorClass<I32> a; //AllocatorClass<T> would fail
+};
+
+void foo()
+{
+  A<I32, Allocator> a;
+  B<> b;
+  B<Allocator16> b2; // B<Allocator16<I32>> would fail;
+}
+
+Q: How do I assign properly several variables to the same value?
+A: Do it after their definition:
+
+
+  Vector3<T> max, min;
+  max = min = pPoints[0];
+
+  Be aware that the following is incorrect:
+
+  Vector3<T> max, min = pPoints[0]; // incorrect as only min is assigned to pPoints[0]
+
+Q: When should I inline?
+A: It is a good practice yo use inline throughtfully. Good inline candidates are short functions that are used often in the code. However writing inline just gives a hint to the compiler and most modern compilers have their own policies to inline a function.
+
+Q: What about templates?
+A: Using inline for consistency is fine. But templates are an exemption. Do not attempt to define templates in cpp files.
+
+Q: friend operators how and when?
+A: whenever necessary but always prefer to define a class operator than a friend one e.g:
+
+prefer: bool operator==(const CharType* pStr) const; // template <typename CharType> class CharList
+to:     template <typename CharType>
+    	friend bool	operator==(const CharList<CharType>& a, const CharType* b);
+
+Q: When should I use a pimpl idiom?
+A: Whenever you want to abstract an implementation
+
+Q: Continuing with pimpl idiom, does that mean I always must use a pimpl when abstracting a third party library?
+A: No, only when you do not want to expose third party classes / structs in your public header files.
+
+Q: Should I always specify the template arguments during template class declaration / definition?
+A: You can or cannot, the important thing is to be consistent. On one hand if you always define the template aregument nothing can go wrong, on the other if you only use it when needed, it is more meaningful as you explicit are using some template arguments in the code looks less cluttered. Remember though that when separating a template class method definition from its declaration you must always specify the template arguments in a return value. Compare:
+
+template <typename T>
+class List
+{
+public:
+    explicit List(const List<T>& other);
+    List<T>&    operator=(const List<T>& other);
+...
+};
+
+template <typename T>
+List<T>& List<T>::operator=(const List<T>& other)
+{
+  ...
+}
+
+to:
+
+template <typename T>
+class List
+{
+public:
+    explicit List(const List& other);
+    List&    operator=(const List& other);
+...
+};
+
+template <typename T>
+List<T>& List<T>::operator=(const List& other)
+{
+  ...
+}
+
+Q: Constructors with one parameter must be explicit always?
+A: Yes, except when defining a copy constructor: it must not be explicit to allow implicit conversions. An explicit copy constructor would not allow this:
+
+String s = String("test");
+
+Q: Void pointers, are they evil? Is it true that they cannot be used with multiple inheritance?
+A: Yes and No. The only thing you can safely do with a reinterpret_cast pointer is reinterpret_cast it back to the same pointer type it came from. This applies with conversions to void*: you must convert back to the original type.
+Use always: OriginalTypeto void* in combination to void* to OriginalType. Casting from void* to OriginalTypeParentTYpe will result in an undefined behavior.
+
+Q: C-style cast vs reinterpret_cast?
+A: C-Style cast just tries all the possible casts: const_cast, static_cast, dynamic_cast and reinterpret_cast until it finds a suitable one. As it is difficult to track and impossible to know which one used, avoid using C-style casts.
+
+Q: size_t vs U32. Which should I use? Why?
+A: always use size_t when working with memory related variables such as size, length, or element count in containers.The reasoning behind is the difference of a pointer type between 32 and 64 bit platforms. The size_t type guarantees always the right size. While U32 is correct for size_t in 32 bit platforms it is not enough for 64 bit platforms.
+
+Q: What if I want to specifically limit a container size to U32?
+A: You may then use U32 but for consistency with other containers or memory allocators I would keep using size_t and control that the limit is not reach within the concrete class.
+
+Q: How to handle const of getters returning pointers?
+A: I would recommend using const methods returning non-const pointers such as:
+T*            GetPtr() const;
+
+Q: What about if I need to modify the pointer value?
+A: Then you can use a non-const method as follows:
+T*&           GetPtr();
+
+Q: Picky question: line length in source files comments, spacing, etc.?
+A: Short answer, just define a length and stick to it for everything. Just be consistent with your decisions and whenever they differ from the "common use" explain them (and try to give a reasoning). I use for example 120 char max length and 2 space identation.
+
+Q: Assert or Exception?
+A: To verify your own code use assert. Throw exceptions when required e.g. the code cannot continue.
+
+Q: How do I assert pointers?
+A: first assert external conditions (contract conditions), this is the parameters passed to a function. Then assert inner conditions e.g. an member pointer is valid.
+
+Q: enums how to name them?
+A: This falls under coding standards, choose yours and follow it consistently.
+I always use a meaningful enum type name and compose the enum value with the namespace / class name so it makes sense (however I tend not to defining enums outside classes or namespaces):
+
+class IGpuBlendState : public IGpuState
+  {
+  public:
+    enum BlendFactor
+    {
+      eBlendFactorZero,
+      eBlendFactorOne,
+      eBlendFactorSourceColor,
+      eBlendFactorInverseSourceColor,
+
+if (blendFactor = IGpuBlendState::eBlendFactorZero)
+{
+  ...
+}
+
+Note that I avoid generic names such as Type or Flag in favor of more concise types relevant to the class such as:
+
+  class IGpuProgramInput
+  {
+  public:
+    enum ProgramInputType
+    {
+      eProgramInputTypeConstantBuffer,
+      eProgramInputTypeResourceBuffer,
+      eProgramInputTypeTexture2D,
+      eProgramInputTypeSampler
+    };
+  };
+
+This way parent interface types are easily trackeable in child classes:
+
+class DX11Texture2D : public IGpuTexture2D
+{
+IGpuProgramInput::ProgramInputType  GetProgramInputType() { return eProgramInputTypeTexture2D; }
+...
+};
+
+Q: Unable to link static libraries using Project Dependencies.. in VS 2010?
+A: Just right-click on the project, select "Properties->Common Properties->Framework and References->Add New Reference" and add the static library project; also check that "Link Library Dependencies" is True on the right hand side.
+
+Q: How to use precompiled headers?
+A: Just right-click on the project, select "Properties->Configuration Properties->C/C++->Precompiled Headers. Define your precompiled header an mark "Use". THen go to the same property on your precompiled header source and select "Create".
+
+Q: Ok what do I include? Is it compatible with the header guard definitions?
+A: Public header files still include what they do require. You private implementation files use the precompiled header. You private header files may include only other private header files.
+
+Q: About POD types? What are there?
+A: An aggregate class is called a POD if it has no user-defined copy-assignment operator and destructor and none of its nonstatic members is a non-POD class, array of non-POD, or a reference. In C++ 11 the definition extends to a class not having a user-defined default constructor either (or using e.g. MyClass() = default).
+
+Q: So if I can only use memcpy with POD types, I cannot use memcpy with classes defining the deault constructor? A: Yes an No. A POD class should have no user-defined copy-assignment operator and destructor and none of its non-static
+members should be a non-POD class, array of non-POD, or a reference. In C++ 11 the requirements also requires the 
+class to not having a user-defined default constructor either (or using e.g. MyClass() = default). The important
+thing to bear in mind is to ensure that the POD candidate class does not have a default constructor and assignment 
+operator that does something in addition to plainly copy the data for it to be compatible with plain memory copy
+functions such as memcpy: e.g. a default constructor with just an initialization list to default its member values
+although user-defined (C++ 11) respects the intrinsic POD type memory copy requirements. Just use the template 
+wisely.
+
+Q: Best practice composition when copying objects through Swap technique
+A: It is important when composing and copying object minimize the objects required to copy. For example if you have a List class based on an Array class and You need to resize your List, you may do:
+
+      List<T, 1> temp(size);
+      temp.SetGrowthFactor(mGrowthFactor);
+      temp.PushBack(*this, Math::Min(mCount, size));
+      *this = temp;
+
+However in this case you only require to swap the Array member not the entire List, hence you should just do:
+
+      Array<T> temp(size);
+      temp.Copy(&mData[0], Math::Min(mCount, size));
+      mData.Swap(temp);
+
+Q: about exceptions. Best practice
+A: Enable all exception through Debug -> Exceptions to be notified when an exception is thrown.
+
+Q: Dll vs static library
+A: Dlls will give you smaller size as common modules can be packed in a dll and be referenced by several executables. 
+However it is important to take care of singletons. If multiple dlls are linked statically against a static library the will get their own copy. 
+This means using a dll is something virical if you have several projects e.g. you have and application exe and an engine dll. 
+Both link statically against a utilities library. If the utilities library contains singletons, a problem will arise. 
+There are only 2 options. convert Engine to a static library or make utilities also a dll.
+
+Q: I am convinced I want a dll how do I convert my static libs to dlls?
+A: First you need to change the build type to dll. Second you may need to expose all non-inline public methods, functions and static variables with the following macro E_API:
+
+#ifdef E_SETTING_DYNAMIC_LIBRARY
+  #define E_API __declspec(dllexport)
+#else
+  #define E_API __declspec(dllimport)
+#endif
+
+and then compile the dll with the macro E_SETTING_DYNAMIC_LIBRARY
+
+Q: What about CRT linking static (MT) or dynamic (MD)?
+A: when working with dlls it is important to note the difference. Each DLL is MT has its own heap while in MD they all share the same. This is an issue especially when
+DLLs allocate memory and use smart pointers across the DLLs. You must ensure that each dll cleans up its own memory.
+
+Q: Tell me more can you give an example? I dont get the singleton relation either.
+A: Assume you have a library Graphics which provides GCRef pointers to the instances it creates. This instances are used by a third party library. On program exit
+the graphics library can be unloaded by the engine library can hold a smart pointer rederences (GCRef) to a Graphics instance. When the smart pointer is destroyed it
+will attempt to unload but the library is not available anymore. This problem happens if the global allocator is provided inline via a singleton e.g:
+
+inline IAllocator* Global::GetAllocator() { return Singleton<AllocatorProvider>::GetInstance().GetAllocator(); }
+
+Note how the GCRef pointer will call Graphics::Singleton<AllocatorProvider> on destruction not Engine::Singleton<AllocatorProvider>
+
+To fix this either:
+1. compile with MD so the heap wil lbe unique along all DLLs
+2. make a hook up method to use a concrete library allocator e.g. make Engine use Graphics allocator such as:
+
+// Inside Engine (some sort of initialization source file)
+Memory::Global::GetAllocatorProvider().SetAllocator(Graphics::Global::GetAllocator()); // this will set Engine global allocator singleton
+
+// In graphics (some header file)
+namespace Global
+{ 
+  E_API Memory::IAllocator*   GetAllocator();
+}
+
+// In graphics (some source file)
+Memory::IAllocator* Graphics::Global::GetAllocator()
+{
+  return Memory::Global::GetAllocator(); // this will retrieve Graphics global allocator singleton
+}
+
+3. Define the singleton in source file (instead of inline) inside one unique library to guarantee access to the same instance across DLLs.
+In a similar fashion as the Graphics allocator in option 2.
+
+Q: why is that bad to define it inline?
+A: It is not bad but a singleton is a based on a static varaible (Meyer-s singleton) and static variables are lcoal to their compilation unit.
+Calling the singleton only inside a source file of the global allcator provider DLL ensures a unique instance to the global allocator. Otherwise
+each DLL calling the inline version will host a global allocator instance in MT (static CRT linking mode = one heap per DLL).
+
+Q: I got error when compiling 64 bit version dll after 32 bit version.
+A: ensure to recompile. Debug version use the dbghelp.dll which has the same name for 32 and 64 bit version. However they are not the same (check the size).
+
+Q: How to correctly disable a warning?
+A: 
+
+  // Known warning: passing this in the initializer list. In ThreadPoolWorker construction, the Thread 
+  // member gets a reference to this as a IRunnable object (whose Run method is executed in Thread::Start).
+  #pragma warning(push)
+  #pragma warning (disable:4355)
+  /**
+  Constructor. Empty at present.
+  @throw	nothing.
+  */
+  inline ThreadPoolWorker::ThreadPoolWorker()
+    : mThread(*this)
+    , mpParentSubscriber(NULL)
+    , mpPendingTask(0)
+    , mTerminationFlag(false)
+  {
+    mThread.Start();
+  }
+  #pragma warning(pop)
+  
+ Q: Can I combine inline and dllexport /dllimport
+ A: Yes, basically dllexport inline will always instatiate and export the function and dllimport inline will never instantiate but retrieve the dll function address instead. More info at:  http://msdn.microsoft.com/en-us/library/xa0d9ste.aspx
+ 
+ Q: pointer to pointer I am confused
+ A: Alwyas read from right to left:
+ 
+ const type* ptr; 	// pointer to a type that is const
+ type const* ptr; 	// pointer to a const type (same as above)
+ type* const ptr; 	// const pointer to a type
+ type* const * ptr;	// pointer to a const pointer to a type
+ 
+ Q: should a getter be const?
+ A: depends. A getter is a method that grants accesst to a private member. If you want to give read access give a const getter. If you want to give write access give a non-const getter.
+ 
+ Q: would you give one or the other then?
+ A: normally I would define a read getter and if write is needed also a write getter. However I usually do not exclude the read getter when I give ther write one e.g:
+ 
+      virtual const IPipeline*    GetPipeline() const = 0;
+      virtual IPipeline*          GetPipeline() = 0;
+	  
+Q: Multiple inheritance is bad?
+A: No. One size does not fit all. It may be the right choice depending on the situation. However I tend to use inheritance (single or multiple) from interfaces only.
+More information on its use or alternatives here: http://www.parashift.com/c++-faq/mi-example.html
+
+Q: How can i get a deadly diamond?
+A: you must use virtual inheritance.
+
+Q: What about if i use interfaces?
+A: it does not matter. Even if you have to classes IDer1, IDer2 inhering from IBase, without virtual inheritance an interface IJoin : public IDer1, public IDer2 would have 2 copies of IBase.
+
+Q: How can you a decrement loop with an unsigned counter?
+A: There are 2 ways: with an without a break:
+
+First method -> equivalent to do ... while
+
+	  // Note that if endIndex is zero the loop will start
+      for(size_t i = endIndex; ; i--)
+      {
+        (...)
+        if (i == startIndex) break;
+      }
+	  
+Second method -> equivalent to while
+
+	  // Note that if endIndex is zero the loop will NOT start
+      for(size_t i = endIndex; startIndex - i--;)
+      {
+        (...)
+      } 
+	  
+Q: How can I achieve partial template specialization?
+A: on functions or class methods it is not possible (C++ limitation). However you cna partially specialize classes:
+
+template<int i, int j>
+struct say_something_impl {
+  static void say_somethng() {
+    std::cout<<"Hello "<<i<<","<<j<<std::endl;
+  }
+};
+ 
+//Our first complete specialization
+template<>
+struct say_something_impl<7,7> {
+  static void say_somethng() {
+    std::cout<<"Double 7 aren't you lucky"<<std::endl;
+  }
+};
+ 
+//Our partial specialization
+template<int j>
+struct say_something_impl<7,j> {
+  static void say_somethng() {
+    std::cout<<"Lucky 7"<<std::endl;
+  }
+};
+
+Q: Why having const and non-const versions e.g?
+
+  E:List2<I32>::ConstIterator cit = myList.GetBegin();
+  E:List2<I32>::Iterator it = myList.GetBegin();
+
+  both call the non-const List2<T, Granularity>::GetBegin() as the compiler will always find the non-const version a
+  better match (it avoids const conversion)?
+  
+A: The proper method will be calles inside methods having a const List reference as a parameter for example.
+
+Q: How to make an iterator?
+A: Always bear in mind its use. An iterator could be just a pointer for a sequential container such as:
+
+ typedef typename T* Iterator;
+ typedef typename const T* ConstIterator;
+ 
+ Or a struct when additional logic is needed such as increment operators for non-contiguous containers:
+ 
+  class ConstIterator
+    {
+    public:
+      typedef ConstIterator   ThisType;
+      typedef const Pair&     Reference;
+      typedef ptrdiff_t       DifferenceType;
+
+      ConstIterator(Pair* pCurrent, const Pair* pEnd) : mpCurrent(pCurrent), mpEnd(pEnd) {}
+      inline Reference  operator*() const { return *mpCurrent; }
+      inline bool       operator==(const ThisType& other) const  { return mpCurrent == other.mpCurrent; }
+      inline bool       operator!=(const ThisType& other) const  { return mpCurrent != other.mpCurrent; }
+      inline bool       operator<(const ThisType& other) const   { return mpCurrent < other.mpCurrent; }
+      inline ThisType&  operator++() { while (++mpCurrent != mpEnd && !KeyHasher::IsValid(mpCurrent->first)) continue; return *this; }
+      DifferenceType    operator-(const ThisType& other) const   { return mpCurrent - other.mpCurrent; }
+
+    protected:
+      Pair*             mpCurrent;
+      const Pair*       mpEnd;
+    };
+
+    class Iterator : public ConstIterator
+    {
+    public:
+      typedef Iterator  ThisType;
+      typedef Pair&     Reference;
+
+      Iterator(Pair* pCurrent, const Pair* pEnd) : ConstIterator(pCurrent, pEnd) {}
+      inline Reference  operator*() const { return *mpCurrent; }
+    };
+	
+Q: Why dont use a struct Iterator and then define the ConstIterator version as const Iterator?
+A: That only works for the pointer version remember that:
+
+ typedef typename T* Iterator; // This is a pointer to an object T
+ typedef typename const T* ConstIterator; // This is a pointer to a const object T (although the pointer is not const)
+ 
+ You do not want a const iterator, you just one to guarantee that the contained object is not modifiable in the ConstIterator struct (you could not e.g. increment your const iterator otherwise). For this purpose you need two different structs. A possibility is use inheritance, such as in the example provided extending Iterator from ConstIterator (more restrictive).
+ 
+Q: How to do a circular next?
+A:     U32 NextIndex2(U32 i) const { return (i + 1) & (mData.GetSize() - 1); }
+ 
+Q: About static member variables, they are unique but are they inherited?
+A: Yes, but be careful if defining the same static variable in a child class. the original will be hidden.
+ 
+class Foo
+{
+public:
+  Foo() { sCount ++; }
+  static I32 sCount;
+};
+
+I32 Foo::sCount; // static types are zero -initialized
+
+class Bar : public Foo
+{
+public:
+  Bar() { sCount ++; }
+};
+
+class RogueBar : public Foo
+{
+public:
+  RogueBar() { sCount ++; }
+  static I32 sCount;
+};
+
+I32 RogueBar::sCount; // static types are zero -initialized
+
+int main()
+{
+  // Foo::sCount = 0
+  Foo foo1;
+  // Foo::sCount = 1 (+1 Foo constructor)
+  Bar bar1;
+  // Foo::sCount = 3 (+1 Foo constructor +1 Bar constructor)
+  RogueBar rogueBar1;
+  // Foo::sCount = 4 (+1 Foo constructor) RogueBar::sCount = 1 (+1 RogueBar constructor)
+  return 0;
+}
+
+Q: How to have a template specialization based on the size of the pointer to differentiate between 32 & 64 bit?
+A: For example:
+  template <typename KeyType, size_t PtrSize = sizeof(KeyType*)>
+  struct Hasher3
+  {
+    static size_t Hash(const KeyType& key);
+    static void   Invalidate(KeyType& key);
+    static bool   IsValid(const KeyType& key);
+    static bool   Equal(const KeyType& key1, const KeyType& key2);
+  };
+
+  template <typename KeyType>
+  struct Hasher3<KeyType, sizeof(U32)>
+  {
+    inline static size_t Hash(KeyType key) 
+    { 
+      size_t hash = (size_t)(key);
+      hash ^= hash >> 16;
+      hash *= 0x85ebca6b;
+      hash ^= hash >> 13;
+      hash *= 0xc2b2ae35;
+      hash ^= hash >> 16;
+      return hash;
+    }
+    inline static void Invalidate(KeyType& key)  { key = KeyType(-1); }
+    inline static bool IsValid(KeyType key)  { return key != KeyType(-1);  }
+    inline static bool Equal(KeyType key1, KeyType key2) { return key1 == key2; }
+  };
+
+  template <typename KeyType>
+  struct Hasher3<KeyType, sizeof(U64)>
+  {
+    inline static size_t Hash(KeyType key) 
+    { 
+      size_t hash = (size_t)(key);
+      hash ^= hash >> 33;
+      hash *= 0xff51afd7ed558ccd;
+      hash ^= hash >> 33;
+      hash *= 0xc4ceb9fe1a85ec53;
+      hash ^= hash >> 33;
+      return hash;
+    }
+    inline static void Invalidate(KeyType& key)  { key = KeyType(-1); }
+    inline static bool IsValid(KeyType key)  { return key != KeyType(-1);  }
+    inline static bool Equal(KeyType key1, KeyType key2) { return key1 == key2; }
+  };
+
+Q: can a template class / struct specialization define different methods or even add?
+A: yes! Of course, bear in mind that a template is just that a template, a guide or scheme of what a the class is going to be. However try always to be consistent and do not make completely different classes depending on the type. That might be a sign that yous hould not use a template if that happens :)
+  
+Q: What about default initialization of arrays e.g I32* numbers?
+A: I32* numbers = new (nothrow) int[amount]; is using default-initialization, which for scalars like int is a noop (i.e. no actual initialization is performed).
+
+If you want explicit initialization, use value-initialization instead:
+
+I32* primes = new (nothrow) int[amount]();
+
+From the C++11 standard, §8.5/6:
+
+To default-initialize an object of type T means:
+
+if T is a (possibly cv-qualified) class type, the default constructor for T is called (and the initialization is ill-formed if T has no accessible default constructor);
+if T is an array type, each element is default-initialized;
+otherwise, no initialization is performed.
+If a program calls for the default initialization of an object of a const-qualified type T, T shall be a class type with a user-provided default constructor.
+
+§8.5/7:
+
+To value-initialize an object of type T means:
+
+if T is a (possibly cv-qualified) class type with a user-provided constructor, then the default constructor for T is called (and the initialization is ill-formed if T has no accessible default constructor);
+if T is a (possibly cv-qualified) non-union class type without a user-provided constructor, then the object is zero-initialized and, if T’s implicitly-declared default constructor is non-trivial, that constructor is called.
+if T is an array type, then each element is value-initialized;
+otherwise, the object is zero-initialized.
+An object that is value-initialized is deemed to be constructed and thus subject to provisions of this International Standard applying to “constructed” objects, objects “for which the constructor has completed,” etc., even if no constructor is invoked for the object’s initialization.
+
+§8.5/6:
+
+To zero-initialize an object or reference of type T means:
+
+if T is a scalar type, the object is set to the value 0 (zero), taken as an integral constant expression, converted to T;
+if T is a (possibly cv-qualified) non-union class type, each non-static data member and each base-class subobject is zero-initialized and padding is initialized to zero bits;
+if T is a (possibly cv-qualified) union type, the object’s first non-static named data member is zero-initialized and padding is initialized to zero bits;
+if T is an array type, each element is zero-initialized;
+if T is a reference type, no initialization is performed.
+And finally from §8.5/10:
+
+An object whose initializer is an empty set of parentheses, i.e., (), shall be value-initialized.
+
+Moreover: (from http://en.cppreference.com/w/cpp/language/zero_initialization)
+
+Syntax:
+1. static T object ;	(1)	
+2. int () ;	(2)	
+3. char array [ n ] = "";	(3)	
+
+Explanation
+Zero initialization is performed in the following situations:
+1) For every named variable with static or thread-local storage duration, before any other initialization.
+2) As part of value-initialization sequence (such as the initialization list) for non-class types and for members of value-initialized class types that have no constructors.
+3) When a character array is initialized with a string literal that is too short, the remainder of the array is zero-initialized.
+
+The effects of zero initialization are:
+If T is a scalar type, the object's initial value is the integral constant zero implicitly converted to T.
+If T is an non-union class type, all base classes and non-static data members are zero-initialized, and all padding is initialized to zero bits. The constructors, if any, are ignored.
+If T is a union type, the first non-static named data member is zero-initialized and all padding is initialized to zero bits.
+If T is array type, each element is zero-initialized
+If T is reference type, nothing is done.
+
+Q: What about casting between types and make a comparison is it safe?
+A: As long as you always make the comparison with the casted version yes e.g:
+
+char key = static_cast<U8>(-1);
+if (key == static_cast<U8>(-1))
+{
+  // Correct!
+} 
+
+if (key == -1)
+{
+  // Incorrect!
+} 
+
+Q: How to control a dynamic library load / unload?
+A: implement the following method on your dll:
+
+BOOL APIENTRY DllMain(HINSTANCE hModule, DWORD  fdwReason, LPVOID lpReserved)
+{
+  switch (fdwReason) 
+  { 
+  case DLL_PROCESS_ATTACH:
+    // Do sth before loading
+    break;
+  case DLL_PROCESS_DETACH:
+    // Do sth before unloading
+    break;
+  }
+  return TRUE;
+}
+
+Q: Should I release DLL resources taking into account that in some OS is not recommended as the OS will free up all the space?
+A: The same should happen with an executable when it exits. I would encourage to do so as default to have a clean exit. If in a concrete platform though discourages it for performance purposes do so. 
+But take into account that you should either do it or do not, not something in between or you may get some extra headached. Check http://blogs.msdn.com/b/oldnewthing/archive/2012/01/05/10253268.aspx
+
+Q: dynamic_cast. Is it evil? When is it useful?
+B: No it is not evil. However it can be slow. It is recommended to use static_cast whenever possible and dynamic_cast when you must.
+
+Q: can you provide an example when dynamic_cast is useful?
+A:
+struct IBaseA
+{
+  virtual ~IBaseA() {}
+  virtual void FooA() = 0;
+};
+
+struct IBaseB
+{
+  virtual ~IBaseB() {}
+  virtual void FooB() = 0;
+};
+
+struct Bar : public IBaseA, public IBaseB
+{
+  void FooA() { cout << "A" << endl; }
+  void FooB() { cout << "B" << endl; }
+};
+
+void Foo()
+{
+  Bar bar;
+
+  IBaseA* pBaseA = &bar;
+  pBaseA->FooA();
+
+  IBaseB* pBaseB = dynamic_cast<IBaseB*>(pBaseA);
+  if (pBaseB)
+  {
+    pBaseB->FooB(); // Correct
+  }
+  IBaseB* pOtherBaseB = reinterpret_cast<IBaseB*>(pBaseA);
+  pOtherBaseB->FooB(); // Incorrect
+}
+
+Q: can then dynamic_cast be avoided?
+A: Yes, it always depends on the design. A case scenario when you want to split a common interfaces into a public and a private part:
+
+e.g.
+
+public interface ISceneObject
+public interface IRenderable
+inteface IMesh : public ISceneObject, public IRenderable
+
+We want IRenderable methods not publically exposed so:
+
+inteface IMesh : public ISceneObject
+private interface IRenderable
+class Mesh : public IMesh, public IRenderable
+
+However when you receive a Mesh object through the ISceneObject interface you cannot access IRenderable without a dynamic_cast
+
+You can attempt to hide the object and apply composition:
+
+public interface ISceneObject
+public interface ISceneObjectComponent
+private interface IRenderable : public ISceneObjectComponent
+
+ISceneObject has method: ISceneObjectComponent* GetComponent();
+inteface IMesh : public ISceneObject
+class Mesh : public IMesh, public IRenderable
+Mesh inherits method: ISceneObjectComponent* GetComponent() { return this; }
+Now you can access GetComponent and static_cast from ISceneObjectComponent* to IRenderable*
+
+Q: static const in a namespace?
+A: do not use as it is deprecated.
+
+Q: what does static mean in avariable?
+A: it makes the variable have internal linkage. This means you can define the same static variable in two cpp and have no collisions.
+
+Q: what does static variable in a header?
+A: it makes the variable have internal linkage (not recommended as you cannot control who includes your header) all cpp including the header will have their own variable (is this the wanted behavior?).
+
+Q: so What s the difference between static const int x = 0 vs const int x = 0  ?
+A: at file scope, no difference in C++. const makes internal linkage the default, and all global variables have static lifetime.
+But the first variant has the same behavior in C, so that may be a good reason to use it.
+Within a function, the second version can be computed from parameters, in C or C++ it doesn't have to be a compile-time constant like some other languages require.
+Within a class, basically the same thing as for functions, an instance const value can be computed in the ctor-initializer-list. A static const is set during startup initialization and remains unchanged for the rest of the program. (Note: the code for static members looks a little different because declaration and initialization are separated.)
+Remember, in C++, const means read-only, not constant. If you have a pointer-to-const then other parts of the program may change the value while you're not looking. If the variable was defined with const, then no one can change it after initialization but initialization can still be arbitrarily complex.
+
+Q: Which is the macro validity? Is there a difference between defining in header or source file?
+A: The validity of a macro is until the next undex or the end of the compilation unit. For this reason a macro in a header will be valid in all cpp including it. A macro in a source file is only visible for that source file.
+
+Q: What does inline do? And why?
+A: Replaces a function call with its definition. It is a way to optimize short functions or functions that are repeated quite often to improve speed. However, abusing inline may incur in bigger executable file and not faster speeds.
+
+Q: Where can I use it?
+A: 
+	1. In source defined functions (cpp)
+	2. In header files:
+      A. global or namespace functions that you define in place.
+	  B. global, namespace, template or class / struct functions when spearating declaration from definition.*
+	 
+	* Remember that class / struct methods defined in the class declarations are implicitely inline: so the keyword is redundant.
+
+Q: Pointer copy vs memmove / memcpy which is faster? Why?
+A: Always benchmark before taking decisions but memcpy / memmove should be faster because memcpy uses word pointers instead of byte pointers, also the memcpy implementations are often written with SIMD instructions which makes it possible to shuffle 128 bits at a time.
+SIMD instructions are assembly instructions that can perform the same operation on each element in a vector up to 16 bytes long. That includes load and store instructions.
+
+Also take note that in general, memcpy is implemented in a simple (but fast manner). Simplistically, it just loops over the data (in order), copying from one location to the other. This can result in the source being overwritten while it's being read.
+Memmove does more work to ensure it handles the overlap correctly. Test always because it depends on the compiler implementation!
+
+Q: How to properly and efficiently implement remove in a container sequential?
+A: the most important thing is to take into account that removal implies destruction of an object. However, when using a dynamic container destruction does not necessarily mean deallocation. THus it is important to forget about default
+destruction which calls the destructor + deallocates the object and use both operations separetely. In a remove you do not want to reallocate the whole container so you have to destruct but not reallocate:
+
+Then you have to do a combination of count reduction + memory copy + destruction. Bear the order it is really important. First the wrong way:
+  template <typename T, size_t Granularity, U8 GrowthPercentage>
+  inline void List<T, Granularity, GrowthPercentage>::Remove(Iterator it, size_t count /* = 1 */)
+  {
+    mCount -= count; 								// first decrease the count by the remove count
+    Memory::Destruct(it, count); 					// second destruct memory
+    Memory::Move(it, it + count, GetEnd() - it); 	// third move memory (error as the memory is actually duplicated (at it - it + count -1 and it + 2 *count -1)
+  }
+  
+  the right way:
+  
+  template <typename T, size_t Granularity, U8 GrowthPercentage>
+  inline void List<T, Granularity, GrowthPercentage>::Remove(Iterator it, size_t count /* = 1 */)
+  {
+    mCount -= count;								// first reduce count
+    Memory::Move(it, it + count, GetEnd() - it);	// second move memory
+    Memory::Destruct(GetEnd(), count);				// finally destroy memory copy / move source
+  }
+  
+  Take a look at the improvement for a one element when the order does not matter:
+  
+  template <typename T, size_t Granularity, U8 GrowthPercentage>
+  inline void List<T, Granularity, GrowthPercentage>::RemoveFast(Iterator it)
+  {
+    *it = mData[--mCount];			// assign (equivalent to copy or move). The assignment operator is responsible to properly release any previous resources.
+    Memory::Destruct(GetEnd());		// destruct assignment source
+  }
+  
+Q: What about destructors? do I have to zero variables? Does it make sense taking into account that they will be called only once?
+A: It is important to note that although destructors are called once as a general rule. It may not be the case when using custom allocators which use the placement new operator. 
+In this case the destructor must be manually invoqued.
+
+For this reason it is important that the destructor leaves the object as if it was default constructed. This is especially important when working with classes that
+allocated memory themselves e.g. A list. or a smart-pointer. Imagine a DynamicArray<DynamicArray<I32>>
+
+First a naive approach:
+
+  template <typename T>
+  inline DynamicArray<T>::~DynamicArray()
+  {
+    E_DELETE(mpPtr, mSize, mpAllocator, Memory::IAllocator::eMemoryTagArrayDelete); // if the destructor is called more than once E_DELETE will fail as mpPtr has been already release but the variable still has a value
+  }
+
+Second the right one:
+
+  template <typename T>
+  inline DynamicArray<T>::~DynamicArray()
+  {
+    E_DELETE(mpPtr, mSize, mpAllocator, Memory::IAllocator::eMemoryTagArrayDelete);
+    mSize = 0;
+    mpPtr = NULL;
+  }
+  
+*whenever you have a doubt of how to destruct your class. Take a look at your default constructor:
+  
+  template <typename T>
+  inline DynamicArray<T>::DynamicArray()
+    : mpAllocator(Memory::Global::GetAllocator())
+    , mpPtr(NULL)
+    , mSize(0) {}
+	
+Q: More on friends: should I use them or go through composition?
+A: Firstly (IMO) don't listen to people who say friend is not useful. It IS useful. In many situations you will have objects with data or functionality that are not 
+intended to be called publicly available. This is particularly true of large codebases with many authors who may only be superficially familiar with different areas.
+There ARE alternatives to the friend specifier, but often they are cumbersome (cpp-level concrete classes/masked typedefs) or not foolproof (comments or function name
+conventions).As an extra note, the C++ FAQ mentions that friend enhances encapsulation. friend grants selective access to members, just like protected does. Any 
+fine-grained control is better than granting public access. Other languages define selective access mechanisms too, consider C#'s internal. Most negative criticism 
+around the use of friend is related to tighter coupling, which is generally seen as a bad thing. However, in some cases, tighter coupling is precisely what you want 
+and friend gives you that power.
+
+Q: Can I privately inherit from an interface in a public interface and then access it via friend?
+A: Not a good idea if you plan to use the class implementing the public interface via its interface. Even if the implementing class has a friend, the friend will not be able
+to access the private part of the interface:
+
+class IFoo
+{
+public:
+  virtual ~IFoo() {}
+  virtual void DoFoo() = 0;
+};
+
+class IBar : IFoo
+{
+public:
+  virtual ~IBar() {}
+  virtual void DoBar() = 0;
+  
+  //friend class BarHandler; // you could declare BarHandler a friend but does it make sense? Not if BarHandler is intended to be private.
+};
+
+class BarHandler;
+
+class Bar : public IBar
+{
+public:
+  Bar(){}
+
+  void DoBar() { cout << "BAAAAaarrr" << endl; }
+
+private:
+  void DoFoo() { cout << "FooOOOoooo" << endl; }
+
+  friend class BarHandler;
+};
+
+class BarHandler
+{
+public:
+  BarHandler(IBar* pBar) : mpBar(pBar) {}
+
+  void HandleBar()
+  {
+    mpBar->DoBar();
+  }
+
+  void HandleFoo()
+  {
+    //mpBar->DoFoo(); // compiler error barHandler is friend of Bar but not of IBar
+  }
+
+private:
+  IBar* mpBar;
+};
+
+void main();
+{
+  Bar bar;
+  BarHandler barHandler(&bar);
+  barHandler.HandleBar();
+  //barHandler.HandleFoo(); // compiler error barHandler is friend of Bar but not of IBar
+}
+
+Q: what if I make an interface IBarHandler which BarHandler implements and I make IBarHandler friend of IBar?
+
+class IBarHandler
+{
+public:
+  virtual ~IBarHandler() {}
+  virtual void HandleBar() = 0;
+};
+
+class IBar : IFoo
+{
+public:
+  virtual ~IBar() {}
+  virtual void DoBar() = 0;
+
+  friend class IBarHandler;
+};
+
+A: friendship is not inherited!!
+
+Q: Do I need to specify the copy constructor and assignment operator in a template class if I already define a version with templated parameters?
+A: Absolutely. Take this example:
+
+template <class T, typename CounterType = U32, class DeleterClass = Memory::Deleter<T>>
+class SharedPtr
+{
+public:
+  SharedPtr();
+  SharedPtr(const SharedPtr& other); // comment to create a big mistake
+  template <class U, class DeleterClassU>
+  SharedPtr(const SharedPtr<U, CounterType, DeleterClassU>& other);
+
+  ...  
+}
+
+and this example code:
+
+    FooA* pFooA = E_NEW(FooA);
+    E::SharedPtr<FooA> spFooA;
+    E::SharedPtr<FooA> spYetAnotherFooA(spFooA);
+	
+The last line is the important: it calls the copy constructor. However if SharedPtr(const SharedPtr& other) was not present the default copy constructor
+would be called (not the second copy constructor with templated parameters) probably leading to serious errors.
+
+Remember the Rule of Three: http://en.wikipedia.org/wiki/Rule_of_three_%28C++_programming%29
+
+Q: Why I can define publicly inherited methods from a class (E.g. inteface) as private? Can I then override the inheritance mode?
+
+class A
+{
+public:
+    virtual double my_func1(int i);
+    virtual double my_func2(int i);
+}
+
+class B : public A // Notice the public inheritance
+{
+public:
+    virtual double my_func1(int i);
+private:
+    virtual double my_func2(int i);
+}
+
+A: No. Even if you defined my_func2 as private inside class B it can be accessed publicly through a class A pointer. If this behavior is intended you may go ahead, otherwise inherite privately.
+
+Q: is it bad to return a reference in a getter?
+A: no it is not if the object is not dynamically allocated. Returning a reference to a dynamically allocated object can produce an access violation when the dynamic object is deallocated.
+
+Q: what about const reference?
+A: const references return is an idiom to return non-primitive types and could make sense even in a dynamically allocated object. However, the user code could still store a const reference leading 
+to the sample problem on deallocation of the owner. On the other hand is pretty obvious that a const reference should not be allocated. I would allow it and mention it in the contract if necessary.
+
+Q: Why use Initialize method when having constructor? Is safe to use this in constructor with inheritance hierarchy?
+A: sometimes you use factory methods that require the default constructor. Furthermore Initialize methods benefit from inheritance. The second answer is No. Suppose you have:
+
+  class SimpleVertexUpdater : public EventSystem::IEventHandler
+  {
+  public:
+                                          SimpleVertexUpdater();
+                                          ~SimpleVertexUpdater();
+
+    void                                  Initialize(Application::IWindow* pWindow);
+    void                                  OnEvent(const Application::UpdateEvent& event);
+
+    E_DISABLE_COPY_AND_ASSSIGNMENT(SimpleVertexUpdater);
+  };
+  
+  The initializer definition is:
+  
+  void SimpleVertexUpdater::Initialize(Application::IWindow* pWindow)
+  {
+    pWindow->GetUpdateEventCallback() += this;
+  }
+  
+  Now we add a child class:
+  
+  class TextureVertexUpdater : public SimpleVertexUpdater
+  {
+  public:
+                                  TextureVertexUpdater();
+
+   void                           OnEvent(const Application::UpdateEvent& event)
+
+    E_DISABLE_COPY_AND_ASSSIGNMENT(TextureVertexUpdater);
+  };
+ 
+  TextureVertexUpdate::OnEvent will be called in TextureVertexUpdater due to the fact that Initialize uses a this pointer as the subscriber. Consider now if we do the same using the constructor
+  SimpleVertexUpdater::SimpleVertexUpdater(const Application::IWindow* pWindow)
+  {
+    pWindow->GetUpdateEventCallback() += this;
+  }
+  
+  In this case the TextureVertexUpdate constructor would call SimpleVertexUpdater constructor and register its pointer this not TextureVertexUpdate's. Therefore TextureVertexUpdate::OnEvent 
+  would never will be triggered.
+  
+  Advice: be careful with using this in constructor when working with inheritance.
+  
+  Q: Why returning const reference is dangerous?
+  A: Dangling reference:
+  
+	foo *pFoo = new foo;
+	const std::string &myName = pFoo->getName();
+	delete pFoo;
+	cout << myName;  // error! dangling reference
+
+Q: Then should I return them?
+A: As long as the semantics of the call and object lifespans are appropriate or documented that is not really a problem: if your object has a name 
+and they keep a reference to it knowing that the lifetime of your object is guaranteed for the complete lifetime of the reference, everything is fine.
+However If you expect the caller to get a copy, return a copy. Espcially in C++11 is the preferred method due to move constructor for temporary objects.
+
+In general
+				Cheap or impossible to copy			Cheap to move (e.g, vector<T>, string)					Expensive to move
+				e.g., int, unique_ptr				Moderate cost to move (e.g., array<vector>, BigPOD)		e.g BigPOD[], array<BigPOD>
+				
+	Out						X f()										<<											f(X&)*
+	In / Out				f(X&)										<<											<<	
+	In (+ retain "copy")	f(X)										f(const X&)									<<
+	
+	“Cheap” ?a handful of hot int copies
+	“Moderate cost” ?memcpyhot/contiguous ~1KB and no allocation
+	* or return T* (unique_ptr<X>/make_shared_<X> in C++11) at the cost of a dynamic allocation
